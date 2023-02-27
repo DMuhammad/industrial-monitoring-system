@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hourmeters()
+    {
+        return $this->hasMany(HourMeter::class);
+    }
+
+    public function replacements()
+    {
+        return $this->hasMany(Replacement::class);
+    }
 }
