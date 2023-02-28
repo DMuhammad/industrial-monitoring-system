@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/department', App\Http\Controllers\DepartmentController::class);
+Route::resource('/parentmachine', App\Http\Controllers\ParentMachineController::class);
+Route::resource('/machine', App\Http\Controllers\MachineController::class);
+Route::resource('/partmachine', App\Http\Controllers\PartMachineController::class);
+Route::resource('/hourmeter', App\Http\Controllers\HourMeterController::class);
+Route::resource('/replacement', App\Http\Controllers\ReplacementController::class);
