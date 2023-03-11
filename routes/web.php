@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\HourMeterController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\ParentMachineController;
+use App\Http\Controllers\PartMachineController;
+use App\Http\Controllers\ReplacementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +23,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/department', App\Http\Controllers\DepartmentController::class);
-Route::resource('/parentmachine', App\Http\Controllers\ParentMachineController::class);
-Route::resource('/machine', App\Http\Controllers\MachineController::class);
-Route::resource('/partmachine', App\Http\Controllers\PartMachineController::class);
-Route::resource('/hourmeter', App\Http\Controllers\HourMeterController::class);
-Route::resource('/replacement', App\Http\Controllers\ReplacementController::class);
+Route::resource('/department', DepartmentController::class);
+Route::resource('/parentmachine', ParentMachineController::class);
+Route::resource('/machine', MachineController::class);
+Route::resource('/partmachine', PartMachineController::class);
+Route::resource('/hourmeter', HourMeterController::class);
+Route::resource('/replacement', ReplacementController::class);
+
+Route::get('/login', function () {
+    return view('auth.login', ['title' => 'Login']);
+});
+
+Route::get('/register', function () {
+    return view('auth.register', ['title' => 'Register']);
+});
+
+Route::get('/dashboard', function () {
+    return view('');
+});
