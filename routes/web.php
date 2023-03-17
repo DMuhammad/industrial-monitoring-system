@@ -23,13 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/department', DepartmentController::class);
-Route::resource('/parentmachine', ParentMachineController::class);
-Route::resource('/machine', MachineController::class);
-Route::resource('/partmachine', PartMachineController::class);
-Route::resource('/hourmeter', HourMeterController::class);
-Route::resource('/replacement', ReplacementController::class);
-
 Route::get('/login', function () {
     return view('auth.login', ['title' => 'Login']);
 });
@@ -39,5 +32,12 @@ Route::get('/register', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('');
+    return view('dashboard');
 });
+
+Route::resource('/dashboard/departments', DepartmentController::class);
+Route::resource('/dashboard/parent-machines', ParentMachineController::class);
+Route::resource('/dashboard/machines', MachineController::class);
+Route::resource('/dashboard/part-machines', PartMachineController::class);
+Route::resource('/dashboard/hourmeters', HourMeterController::class);
+Route::resource('/dashboard/replacements', ReplacementController::class);
