@@ -12,7 +12,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return 'Ini Bagian Departement';
+        $departments = Department::get();
+
+        // return view to index with data from departments
+        return view('dashboard.departments.index', compact('departments'));
     }
 
     /**
@@ -35,8 +38,12 @@ class DepartmentController extends Controller
         $department = Department::create([
             'department_name' => $request->get('department_name')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('department.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -44,13 +51,14 @@ class DepartmentController extends Controller
     {
         //
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Department $department)
     {
-        //
+        // return view to edit with data from department
+        return view('dashboard.departments.edit', compact('department'));
     }
 
     /**
@@ -60,18 +68,26 @@ class DepartmentController extends Controller
     {
         $this->validate($request, [
             'department_name' => ['required', 'string']
+
         ]);
-    
         $department->update([
             'department_name' => $request->get('department_name')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('department.index')
+            ->with('success', 'Berhasil mengubah data');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Department $department)
     {
         $department->delete();
+
+        // redirect to index and bring message success
+        return redirect()->route('department.index')
+            ->with('success', 'Berhasil menghapus data');
     }
 }

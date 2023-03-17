@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Machine;
+use App\Models\ParentMachine;
+use App\Models\PartMachine;
 use App\Models\Replacement;
 use Illuminate\Http\Request;
 
@@ -12,7 +16,14 @@ class ReplacementController extends Controller
      */
     public function index()
     {
-        //
+        $replacements = Replacement::get();
+        $departments = Department::get();
+        $parentmachines = ParentMachine::get();
+        $machines = Machine::get();
+        $partmachines = PartMachine::get();
+
+        // return view to index with data from replacements, departments, parentmachines, machines, and partmachines
+        return view('replacements.index', compact('replacements', 'departments', 'parentmachines', 'machines', 'partmachines'));
     }
 
     /**
@@ -28,7 +39,7 @@ class ReplacementController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate([
+        $this->validate($request, [
             'department_id'         =>  ['required'],
             'parent_id'             =>  ['required'],
             'machine_id'            =>  ['required'],
@@ -45,8 +56,12 @@ class ReplacementController extends Controller
             'user_id'               =>  $request->get('user_id'),
             'replacement_hourmeter' =>  $request->get('replacement_hourmeter')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('replacement.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -60,31 +75,39 @@ class ReplacementController extends Controller
      */
     public function edit(Replacement $replacement)
     {
-        //
+        $departments = Department::get();
+        $parentmachines = ParentMachine::get();
+        $machines = Machine::get();
+        $partmachines = PartMachine::get();
+
+        // return view to edit with data from replacement, departments, parentmachines, machines, and partmachines
+        return view('replacements.edit', compact('replacement', 'departments', 'parentmachines', 'machines', 'partmachines'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Replacement $replacement)
     {
-        $this->validate([
+        $this->validate($request, [
             'department_id'         =>  ['required'],
             'parent_id'             =>  ['required'],
             'machine_id'            =>  ['required'],
             'part_id'               =>  ['required'],
-            'user_id'               =>  ['required'],
             'replacement_hourmeter' =>  ['required', 'Integer']
         ]);
-    
+
         $replacement->update([
             'department_id'         =>  $request->get('department_id'),
             'parent_id'             =>  $request->get('parent_id'),
             'machine_id'            =>  $request->get('machine_id'),
             'part_id'               =>  $request->get('part_id'),
-            'user_id'               =>  $request->get('user_id'),
             'replacement_hourmeter' =>  $request->get('replacement_hourmeter')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('replacement.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -93,5 +116,9 @@ class ReplacementController extends Controller
     public function destroy(Replacement $replacement)
     {
         $replacement->delete();
+
+        // redirect to index and bring message success
+        return redirect()->route('replacement.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Machine;
+use App\Models\ParentMachine;
 use Illuminate\Http\Request;
 
 class MachineController extends Controller
@@ -12,7 +13,11 @@ class MachineController extends Controller
      */
     public function index()
     {
-        //
+        $machines = Machine::get();
+        $parentmachines = ParentMachine::get();
+
+        // return view to index with data from machines and parentmachines
+        return view('dashboard.machines.index', compact('machines', 'parentmachines'));
     }
 
     /**
@@ -28,7 +33,7 @@ class MachineController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate([
+        $this->validate($request, [
             'machine_name'  =>  ['required', 'string'],
             'parent_id'     =>  ['required']
         ]);
@@ -37,8 +42,12 @@ class MachineController extends Controller
             'machine_name'  =>  $request->get('machine_name'),
             'parent_id'     =>  $request->get('parent_id')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('machine.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -46,13 +55,16 @@ class MachineController extends Controller
     {
         //
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Machine $machine)
     {
-        //
+        $parentmachines = ParentMachine::get();
+
+        // return view to edit with data from machine and parentmachines
+        return view('dashboard.machines.edit', compact('machine', 'parentmachines'));
     }
 
     /**
@@ -60,15 +72,19 @@ class MachineController extends Controller
      */
     public function update(Request $request, Machine $machine)
     {
-        $this->validate([
+        $this->validate($request, [
             'machine_name'  =>  ['required', 'string'],
             'parent_id'     =>  ['required']
         ]);
-    
+
         $machine->update([
             'machine_name'  =>  $request->get('machine_name'),
             'parent_id'     =>  $request->get('parent_id')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('machine.index')
+            ->with('success', 'Berhasil mengubah data');
     }
 
     /**
@@ -77,5 +93,9 @@ class MachineController extends Controller
     public function destroy(Machine $machine)
     {
         $machine->delete();
+
+        // redirect to index and bring message success
+        return redirect()->route('machine.index')
+            ->with('success', 'Berhasil menghapus data');
     }
 }

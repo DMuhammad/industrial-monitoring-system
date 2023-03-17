@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ParentMachine;
 use Illuminate\Http\Request;
+use App\Models\Department;
 
 class ParentMachineController extends Controller
 {
@@ -12,7 +13,11 @@ class ParentMachineController extends Controller
      */
     public function index()
     {
-        //
+        $parentmachines = ParentMachine::get();
+        $departments = Department::get();
+
+        // return view to index with data from parentmachines and departments
+        return view('dashboard.parent-machines.index', compact('parentmachines', 'departments'));
     }
 
     /**
@@ -20,25 +25,29 @@ class ParentMachineController extends Controller
      */
     public function create()
     {
-        $this->validate([
-            'parent_name'   =>  ['required', 'string'],
-            'department_id' =>  ['required']
-        ]);
-
-        $parentMachine = ParentMachine::create([
-            'parent_name'   =>  $request->get('parent_name'),
-            'department_id' =>  $request->get('department_id')
-        ]);
+        // 
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'parent_name'   =>  ['required', 'string'],
+            'department_id' =>  ['required']
+        ]);
+
+        $parentmachine = ParentMachine::create([
+            'parent_name'   =>  $request->get('parent_name'),
+            'department_id' =>  $request->get('department_id')
+        ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('parentmachine.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -50,32 +59,43 @@ class ParentMachineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ParentMachine $parentMachine)
+    public function edit(ParentMachine $parentmachine)
     {
-        //
+        $departments = Department::get();
+
+        // return view to edit with data from parentmachines and departments
+        return view('dashboard.parent-machines.edit', compact('parentmachine', 'departments'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ParentMachine $parentMachine)
+    public function update(Request $request, ParentMachine $parentmachine)
     {
-        $this->validate([
+        $this->validate($request, [
             'parent_name'   =>  ['required', 'string'],
             'department_id' =>  ['required']
         ]);
-    
-        $parentMachine->update([
+
+        $parentmachine->update([
             'parent_name'   =>  $request->get('parent_name'),
             'department_id' =>  $request->get('department_id')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('parentmachine.index')
+            ->with('success', 'berhasil mengubah data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ParentMachine $parentMachine)
+    public function destroy(ParentMachine $parentmachine)
     {
-        $parentMachine->delete();
+        $parentmachine->delete();
+
+        // redirect to index and bring message success
+        return redirect()->route('parentmachine.index')
+            ->with('success', 'Berhasil menghapus data');
     }
 }
