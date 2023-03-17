@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\PartMachine;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class PartMachineController extends Controller
      */
     public function index()
     {
-        //
+        $partmachines = PartMachine::get();
+        $machines = Machine::get();
+
+        // return view to index with data from partmachines and machines
+        return view('dashboard.part-machines.index', compact('partmachines', 'machines'));
     }
 
     /**
@@ -28,7 +33,7 @@ class PartMachineController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate([
+        $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
             'standart_hourmeter'    =>  ['required', 'Integer'],
             'machine_id'            =>  ['required']
@@ -39,8 +44,12 @@ class PartMachineController extends Controller
             'standart_hourmeter'    =>  $request->get('standart_hourmeter'),
             'machine_id'            =>  $request->get('machine_id')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('partmachine.index')
+            ->with('success', 'Berhasil menambahkan data');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -48,38 +57,49 @@ class PartMachineController extends Controller
     {
         //
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PartMachine $partMachine)
+    public function edit(PartMachine $partmachine)
     {
-        //
+        $machines = Machine::get();
+
+        // return view to edit with data from partmachine and machines
+        return view('dashboard.part-machines.edit', compact('partmachine', 'machines'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PartMachine $partMachine)
+    public function update(Request $request, PartMachine $partmachine)
     {
-        $this->validate([
+        $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
             'standart_hourmeter'    =>  ['required', 'Integer'],
             'machine_id'            =>  ['required']
         ]);
-    
-        $partMachine->update([
+
+        $partmachine->update([
             'part_name'             =>  $request->get('part_name'),
             'standart_hourmeter'    =>  $request->get('standart_hourmeter'),
             'machine_id'            =>  $request->get('machine_id')
         ]);
+
+        // redirect to index and bring message success
+        return redirect()->route('partmachine.index')
+            ->with('success', 'Berhasil mengubah data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PartMachine $partMachine)
+    public function destroy(PartMachine $partmachine)
     {
-        $partMachine->delete();
+        $partmachine->delete();
+
+        // redirect to index and bring message success
+        return redirect()->route('partmachine.index')
+            ->with('success', 'Berhasil menghapus data');
     }
 }
