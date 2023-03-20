@@ -26,17 +26,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     });
+
+    Route::resource('departments', DepartmentController::class)->middleware('isAdmin');
+    Route::resource('parent-machines', ParentMachineController::class)->middleware('isAdmin');
+    Route::resource('machines', MachineController::class)->middleware('isAdmin');
+    Route::resource('part-machines', PartMachineController::class)->middleware('isAdmin');
+
     Route::resources([
-        'departments'       => DepartmentController::class,
-        'parent-machines'   => ParentMachineController::class,
-        'machines'          => MachineController::class,
-        'part-machines'     => PartMachineController::class,
         'hour-meters'       => HourMeterController::class,
         'replacements'      => ReplacementController::class,
     ]);
+
     Route::get('logout', LogoutController::class)->name('logout');
 });
-
 
 Route::resources([
     'register'  => RegisterController::class,
