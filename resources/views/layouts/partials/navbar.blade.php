@@ -12,25 +12,20 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-decoration-none" href="#"
                     data-bs-toggle="dropdown">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                        class="avatar img-fluid rounded me-1" alt="Royhan Daffa" />
-                    <span class="text-dark">Royhan Daffa</span>
+                    <span class="text-dark me-2">{{ auth()->user()->name }}</span>
+                    {{-- <figure class="img-profile rounded-circle avatar font-weight-bold"
+                        data-initial="{{ substr(auth()->user()->name, 0, 1) }}"></figure> --}}
+                    <img src="{{ Avatar::create('{{ auth()->user()->name } }}')->toBase64() }}" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="pages-profile.html">
+                    <a class="dropdown-item" href="/profile">
                         <i class="align-middle me-1" data-feather="user"></i> Profile
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="index.html">
-                        <i class="align-middle me-1" data-feather="settings"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="align-middle me-1" data-feather="help-circle"></i>
-                        Help Center
+                    <a class="dropdown-item" href="/settings">
+                        <i class="align-middle me-1" data-feather="settings"></i> Settings
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="/logout">Log out</a>
                 </div>
             </li>
         </ul>

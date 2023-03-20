@@ -15,19 +15,11 @@
                         <div class="form-group mt-4 mb-4">
                             <label for="name">Your Name</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon3">
-                                    <i class="fas fa-user"></i>
+                                <span class="input-group-text text-secondary" id="basic-addon3">
+                                    <i class="align-middle" data-feather="user"></i>
                                 </span>
-                                <input 
-                                    id="name" 
-                                    type="text" 
-                                    name="name"
-                                    class="form-control" 
-                                    placeholder="Full Name" 
-                                    value="{{ old('name') }}"
-                                    autofocus
-                                    required 
-                                >
+                                <input id="name" type="text" name="name" class="form-control"
+                                    placeholder="Full Name" value="{{ old('name') }}" autofocus required>
                             </div>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -41,19 +33,11 @@
                         <div class="form-group mt-4 mb-4">
                             <label for="email">Your Email</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon3">
-                                    <i class="fas fa-envelope"></i>
+                                <span class="input-group-text text-secondary" id="basic-addon3">
+                                    <i class="align-middle" data-feather="mail"></i>
                                 </span>
-                                <input 
-                                    id="email" 
-                                    type="email" 
-                                    name="email"
-                                    class="form-control" 
-                                    placeholder="name@example.com"
-                                    value="{{ old('email') }}"
-                                    autofocus 
-                                    required 
-                                >
+                                <input id="email" type="email" name="email" class="form-control"
+                                    placeholder="name@example.com" value="{{ old('email') }}" autofocus required>
                             </div>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -67,17 +51,11 @@
                         <div class="form-group mb-4">
                             <label for="password">Your Password</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon4">
-                                    <i class="fas fa-lock"></i>
+                                <span class="input-group-text text-secondary" id="basic-addon4">
+                                    <i class="align-middle" data-feather="lock"></i>
                                 </span>
-                                <input 
-                                    id="password"
-                                    type="password" 
-                                    name="password" 
-                                    class="form-control" 
-                                    placeholder="Password" 
-                                    required
-                                >
+                                <input id="password" type="password" name="password" class="form-control"
+                                    placeholder="Password" required>
                             </div>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -91,17 +69,11 @@
                         <div class="form-group mb-4">
                             <label for="password_confirmation">Confirm Password</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon5">
-                                    <i class="fas fa-lock"></i>
+                                <span class="input-group-text text-secondary" id="basic-addon5">
+                                    <i class="align-middle" data-feather="lock"></i>
                                 </span>
-                                <input 
-                                    id="password_confirmation" 
-                                    name="password_confirmation" 
-                                    type="password" 
-                                    class="form-control"
-                                    placeholder="Confirm Password" 
-                                    required
-                                >
+                                <input id="password_confirmation" name="password_confirmation" type="password"
+                                    class="form-control" placeholder="Confirm Password" required>
                             </div>
                         </div>
                         <!-- End of Form -->
