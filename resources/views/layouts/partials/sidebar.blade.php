@@ -11,7 +11,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -40,6 +40,15 @@
             <span>About</span>
         </a>
     </li>
+    
+    @if (auth()->check())
+        <li class="nav-item ">
+            <a class="nav-link" href="logout">
+                <i class="fas fa-fw fa-hands-helping"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

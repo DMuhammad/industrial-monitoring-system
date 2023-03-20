@@ -8,7 +8,9 @@
                     <div class="text-center text-md-center mb-4 mt-md-0">
                         <h3 class="mb-0">Create Account</h3>
                     </div>
-                    <form action="#" class="mt-4" method="POST">
+                    <form action="{{ route('register.store') }}" class="mt-4" method="POST">
+                        @csrf
+
                         <!-- Form Name-->
                         <div class="form-group mt-4 mb-4">
                             <label for="name">Your Name</label>
@@ -16,9 +18,22 @@
                                 <span class="input-group-text" id="basic-addon3">
                                     <i class="fas fa-user"></i>
                                 </span>
-                                <input id="name" type="name" class="form-control" placeholder="Full Name" autofocus
-                                    required>
+                                <input 
+                                    id="name" 
+                                    type="text" 
+                                    name="name"
+                                    class="form-control" 
+                                    placeholder="Full Name" 
+                                    value="{{ old('name') }}"
+                                    autofocus
+                                    required 
+                                >
                             </div>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- End of Form -->
 
@@ -29,9 +44,22 @@
                                 <span class="input-group-text" id="basic-addon3">
                                     <i class="fas fa-envelope"></i>
                                 </span>
-                                <input id="email" type="email" class="form-control" placeholder="name@example.com"
-                                    autofocus required>
+                                <input 
+                                    id="email" 
+                                    type="email" 
+                                    name="email"
+                                    class="form-control" 
+                                    placeholder="name@example.com"
+                                    value="{{ old('email') }}"
+                                    autofocus 
+                                    required 
+                                >
                             </div>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- End of Form -->
 
@@ -42,21 +70,38 @@
                                 <span class="input-group-text" id="basic-addon4">
                                     <i class="fas fa-lock"></i>
                                 </span>
-                                <input type="password" placeholder="Password" class="form-control" id="password"
-                                    name="password" required>
+                                <input 
+                                    id="password"
+                                    type="password" 
+                                    name="password" 
+                                    class="form-control" 
+                                    placeholder="Password" 
+                                    required
+                                >
                             </div>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- End of Form -->
 
                         <!-- Form Confirm Password -->
                         <div class="form-group mb-4">
-                            <label for="confirm_password">Confirm Password</label>
+                            <label for="password_confirmation">Confirm Password</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon5">
                                     <i class="fas fa-lock"></i>
                                 </span>
-                                <input type="password" placeholder="Confirm Password" class="form-control"
-                                    id="confirm_password" name="confirm_password" required>
+                                <input 
+                                    id="password_confirmation" 
+                                    name="password_confirmation" 
+                                    type="password" 
+                                    class="form-control"
+                                    placeholder="Confirm Password" 
+                                    required
+                                >
                             </div>
                         </div>
                         <!-- End of Form -->
