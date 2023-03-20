@@ -1,61 +1,22 @@
-<!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-text mx-3">Sistem Monitoring</div>
-    </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="/">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+<nav id="sidebar" class="sidebar sidebar-menu">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" href="/dashboard">
+            <span class="align-middle">Sismonin</span>
         </a>
-    </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <ul class="sidebar-nav">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Settings
+            <li class="sidebar-item active">
+                <a class="sidebar-link" href="/dashboard">
+                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/profile">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+                </a>
+            </li>
+        </ul>
     </div>
-
-    <!-- Nav Item - Profile -->
-    <li class="nav-item">
-        <a class="nav-link" href="/profile">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Profile</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - About -->
-    <li class="nav-item ">
-        <a class="nav-link" href="/about">
-            <i class="fas fa-fw fa-hands-helping"></i>
-            <span>About</span>
-        </a>
-    </li>
-    
-    @if (auth()->check())
-        <li class="nav-item ">
-            <a class="nav-link" href="logout">
-                <i class="fas fa-fw fa-hands-helping"></i>
-                <span>Logout</span>
-            </a>
-        </li>
-    @endif
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-</ul>
-<!-- End of Sidebar -->
+</nav>
