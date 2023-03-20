@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
@@ -19,25 +22,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+    Route::resources([
+        'departments'       => DepartmentController::class,
+        'parent-machines'   => ParentMachineController::class,
+        'machines'          => MachineController::class,
+        'part-machines'     => PartMachineController::class,
+        'hour-meters'       => HourMeterController::class,
+        'replacements'      => ReplacementController::class,
+    ]);
+    Route::get('logout', LogoutController::class)->name('logout');
 });
 
-Route::get('/login', function () {
-    return view('auth.login', ['title' => 'Login']);
-});
 
-Route::get('/register', function () {
-    return view('auth.register', ['title' => 'Register']);
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::resource('/dashboard/departments', DepartmentController::class);
-Route::resource('/dashboard/parent-machines', ParentMachineController::class);
-Route::resource('/dashboard/machines', MachineController::class);
-Route::resource('/dashboard/part-machines', PartMachineController::class);
-Route::resource('/dashboard/hourmeters', HourMeterController::class);
-Route::resource('/dashboard/replacements', ReplacementController::class);
+Route::resources([
+    'register'  => RegisterController::class,
+    'login'     => LoginController::class,
+]);
