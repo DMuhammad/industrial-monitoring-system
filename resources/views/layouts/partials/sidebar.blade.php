@@ -7,7 +7,7 @@
         <ul class="sidebar-nav">
 
             <li class="sidebar-item active">
-                <a class="sidebar-link" href="/dashboard">
+                <a class="sidebar-link" href="/">
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>

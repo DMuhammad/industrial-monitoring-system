@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\ParentMachineController;
@@ -23,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    Route::get('/', HomeController::class)->name('home');
 
     Route::resource('departments', DepartmentController::class)->middleware('isAdmin');
     Route::resource('parent-machines', ParentMachineController::class)->middleware('isAdmin');

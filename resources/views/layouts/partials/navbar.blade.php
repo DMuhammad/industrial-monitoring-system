@@ -15,7 +15,6 @@
                     <span class="text-dark me-2">{{ auth()->user()->name }}</span>
                     {{-- <figure class="img-profile rounded-circle avatar font-weight-bold"
                         data-initial="{{ substr(auth()->user()->name, 0, 1) }}"></figure> --}}
-                    <img src="{{ Avatar::create('{{ auth()->user()->name } }}')->toBase64() }}" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="/profile">
