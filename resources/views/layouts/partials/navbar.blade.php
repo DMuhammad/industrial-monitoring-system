@@ -13,8 +13,10 @@
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-decoration-none" href="#"
                     data-bs-toggle="dropdown">
                     <span class="text-dark me-2">{{ auth()->user()->name }}</span>
+                    {{-- DIKERJAKAN AKHIR -- AVATAR --}}
                     {{-- <figure class="img-profile rounded-circle avatar font-weight-bold"
                         data-initial="{{ substr(auth()->user()->name, 0, 1) }}"></figure> --}}
+                    {{-- <img src="{{ asset('users/'.auth()->user()->id.'/generated_cover.png') }}" class="mr-2" /> --}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="/profile">
