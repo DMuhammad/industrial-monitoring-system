@@ -14,10 +14,9 @@ class ParentMachineController extends Controller
     public function index()
     {
         $parentmachines = ParentMachine::get();
-        $departments = Department::get();
 
-        // return view to index with data from parentmachines and departments
-        return view('dashboard.parent-machines.index', compact('parentmachines', 'departments'));
+        // return view to index with data from parentmachines
+        return view('pages.admin.parent_machines.index', compact('parentmachines'));
     }
 
     /**
@@ -25,7 +24,10 @@ class ParentMachineController extends Controller
      */
     public function create()
     {
-        // 
+        $departments = Department::get();
+
+        // return view create form with data from departments
+        return view('pages.admin.parent_machines.create', compact('departments'));
     }
 
     /**
@@ -44,7 +46,7 @@ class ParentMachineController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('parentmachine.index')
+        return redirect()->route('parentmachines.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -57,37 +59,6 @@ class ParentMachineController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ParentMachine $parentmachine)
-    {
-        $departments = Department::get();
-
-        // return view to edit with data from parentmachines and departments
-        return view('dashboard.parent-machines.edit', compact('parentmachine', 'departments'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ParentMachine $parentmachine)
-    {
-        $this->validate($request, [
-            'parent_name'   =>  ['required', 'string'],
-            'department_id' =>  ['required']
-        ]);
-
-        $parentmachine->update([
-            'parent_name'   =>  $request->get('parent_name'),
-            'department_id' =>  $request->get('department_id')
-        ]);
-
-        // redirect to index and bring message success
-        return redirect()->route('parentmachine.index')
-            ->with('success', 'berhasil mengubah data');
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(ParentMachine $parentmachine)
@@ -95,7 +66,7 @@ class ParentMachineController extends Controller
         $parentmachine->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('parentmachine.index')
+        return redirect()->route('parentmachines.index')
             ->with('success', 'Berhasil menghapus data');
     }
 }
