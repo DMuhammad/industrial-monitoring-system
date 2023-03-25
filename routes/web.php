@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DropDownController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
@@ -27,14 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/', HomeController::class)->name('home');
 
     Route::resource('departments', DepartmentController::class)->middleware('isAdmin');
-    Route::resource('parent-machines', ParentMachineController::class)->middleware('isAdmin');
+    Route::resource('parentmachines', ParentMachineController::class)->middleware('isAdmin');
     Route::resource('machines', MachineController::class)->middleware('isAdmin');
-    Route::resource('part-machines', PartMachineController::class)->middleware('isAdmin');
+    Route::resource('partmachines', PartMachineController::class)->middleware('isAdmin');
 
     Route::resources([
-        'hour-meters'       => HourMeterController::class,
+        'hourmeters'       => HourMeterController::class,
         'replacements'      => ReplacementController::class,
     ]);
+
+    Route::get('parentmachine', [DropDownController::class, 'getParentMachine'])->name('parentmachine');
+    Route::get('machine', [DropDownController::class, 'getMachine'])->name('machine');
+    Route::get('partmachine', [DropDownController::class, 'getPartMachine'])->name('partmachine');
 
     Route::get('logout', LogoutController::class)->name('logout');
 });
