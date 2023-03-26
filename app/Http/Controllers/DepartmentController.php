@@ -12,10 +12,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::orderBy('created_at', 'desc')->get();
-
-        // return view to index with data from departments
-        return view('pages.admin.departments.index', compact('departments'));
+        // return view to index
+        return view('pages.admin.departments.index');
     }
 
     /**
@@ -23,6 +21,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
+        // return view create form
         return view('pages.admin.departments.create');
     }
 
@@ -42,41 +41,6 @@ class DepartmentController extends Controller
         // redirect to index and bring message success
         return redirect()->route('departments.index')
             ->with('success', 'Berhasil menambahkan data');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Department $department)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Department $department)
-    {
-        // return view to edit with data from department
-        return view('dashboard.departments.edit', compact('department'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Department $department)
-    {
-        $this->validate($request, [
-            'department_name' => ['required', 'string']
-
-        ]);
-        $department->update([
-            'department_name' => $request->get('department_name')
-        ]);
-
-        // redirect to index and bring message success
-        return redirect()->route('departments.index')
-            ->with('success', 'Berhasil mengubah data');
     }
 
     /**

@@ -17,13 +17,9 @@ class ReplacementController extends Controller
     public function index()
     {
         $replacements = Replacement::get();
-        $departments = Department::get();
-        $parentmachines = ParentMachine::get();
-        $machines = Machine::get();
-        $partmachines = PartMachine::get();
 
-        // return view to index with data from replacements, departments, parentmachines, machines, and partmachines
-        return view('pages.replacements.index', compact('replacements', 'departments', 'parentmachines', 'machines', 'partmachines'));
+        // return view to index with data from replacements
+        return view('pages.replacements.index', compact('replacements'));
     }
 
     /**
@@ -31,7 +27,10 @@ class ReplacementController extends Controller
      */
     public function create()
     {
-        //
+        $replacements = Replacement::get();
+
+        // return view to index with data from replacements
+        return view('pages.replacements.create', compact('replacements'));
     }
 
     /**
@@ -58,7 +57,7 @@ class ReplacementController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('replacement.index')
+        return redirect()->route('replacements.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -76,12 +75,9 @@ class ReplacementController extends Controller
     public function edit(Replacement $replacement)
     {
         $departments = Department::get();
-        $parentmachines = ParentMachine::get();
-        $machines = Machine::get();
-        $partmachines = PartMachine::get();
 
-        // return view to edit with data from replacement, departments, parentmachines, machines, and partmachines
-        return view('replacements.edit', compact('replacement', 'departments', 'parentmachines', 'machines', 'partmachines'));
+        // return view to edit with data from replacement, and departments
+        return view('replacements.edit', compact('replacement', 'departments'));
     }
 
     /**
@@ -106,8 +102,8 @@ class ReplacementController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('replacement.index')
-            ->with('success', 'Berhasil menambahkan data');
+        return redirect()->route('replacements.index')
+            ->with('success', 'Berhasil mengubah data');
     }
 
     /**
@@ -118,7 +114,7 @@ class ReplacementController extends Controller
         $replacement->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('replacement.index')
-            ->with('success', 'Berhasil menambahkan data');
+        return redirect()->route('replacements.index')
+            ->with('success', 'Berhasil menghapus data');
     }
 }
