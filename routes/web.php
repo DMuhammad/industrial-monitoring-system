@@ -10,6 +10,7 @@ use App\Http\Controllers\MachineController;
 use App\Http\Controllers\ParentMachineController;
 use App\Http\Controllers\PartMachineController;
 use App\Http\Controllers\ReplacementController;
+use App\Http\Controllers\DropdownController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,15 +28,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/', HomeController::class)->name('home');
 
     Route::resource('departments', DepartmentController::class)->middleware('isAdmin');
-    Route::resource('parent-machines', ParentMachineController::class)->middleware('isAdmin');
+    Route::resource('parentmachines', ParentMachineController::class)->middleware('isAdmin');
     Route::resource('machines', MachineController::class)->middleware('isAdmin');
-    Route::resource('part-machines', PartMachineController::class)->middleware('isAdmin');
+    Route::resource('partmachines', PartMachineController::class)->middleware('isAdmin');
 
     Route::resources([
-        'hour-meters'       => HourMeterController::class,
+        'hourmeters'       => HourMeterController::class,
         'replacements'      => ReplacementController::class,
     ]);
 
+    Route::get('parentdropdown/{id}', [DropdownController::class, 'getParentMachine']);
     Route::get('logout', LogoutController::class)->name('logout');
 });
 

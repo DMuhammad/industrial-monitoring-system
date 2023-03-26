@@ -84,7 +84,7 @@
                     <div class="d-flex justify-content-center align-items-center mt-4">
                         <span class="fw-normal">
                             Already have an account?
-                            <a href="/login" class="fw-bold text-decoration-none text-dark">Login here</a>
+                            <a href="/login" class="fw-bold text-dark">Login here</a>
                         </span>
                     </div>
                 </div>

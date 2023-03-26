@@ -14,10 +14,9 @@ class PartMachineController extends Controller
     public function index()
     {
         $partmachines = PartMachine::get();
-        $machines = Machine::get();
 
         // return view to index with data from partmachines and machines
-        return view('dashboard.part-machines.index', compact('partmachines', 'machines'));
+        return view('pages.admin.part_machines.index', compact('partmachines'));
     }
 
     /**
@@ -25,7 +24,9 @@ class PartMachineController extends Controller
      */
     public function create()
     {
-        //
+        $machines = Machine::get();
+
+        return view('pages.admin.part_machines.create', compact('machines'));
     }
 
     /**
@@ -35,18 +36,18 @@ class PartMachineController extends Controller
     {
         $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
-            'standart_hourmeter'    =>  ['required', 'Integer'],
+            'standard_hourmeter'    =>  ['required', 'Integer'],
             'machine_id'            =>  ['required']
         ]);
 
         $partMachine = PartMachine::create([
             'part_name'             =>  $request->get('part_name'),
-            'standart_hourmeter'    =>  $request->get('standart_hourmeter'),
+            'standard_hourmeter'    =>  $request->get('standard_hourmeter'),
             'machine_id'            =>  $request->get('machine_id')
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('partmachine.index')
+        return redirect()->route('partmachines.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -76,18 +77,18 @@ class PartMachineController extends Controller
     {
         $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
-            'standart_hourmeter'    =>  ['required', 'Integer'],
+            'standard_hourmeter'    =>  ['required', 'Integer'],
             'machine_id'            =>  ['required']
         ]);
 
         $partmachine->update([
             'part_name'             =>  $request->get('part_name'),
-            'standart_hourmeter'    =>  $request->get('standart_hourmeter'),
+            'standard_hourmeter'    =>  $request->get('standard_hourmeter'),
             'machine_id'            =>  $request->get('machine_id')
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('partmachine.index')
+        return redirect()->route('partmachines.index')
             ->with('success', 'Berhasil mengubah data');
     }
 
@@ -99,7 +100,7 @@ class PartMachineController extends Controller
         $partmachine->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('partmachine.index')
+        return redirect()->route('partmachines.index')
             ->with('success', 'Berhasil menghapus data');
     }
 }

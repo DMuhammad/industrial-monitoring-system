@@ -13,11 +13,10 @@ class MachineController extends Controller
      */
     public function index()
     {
-        $machines = Machine::get();
-        $parentmachines = ParentMachine::get();
+        $machines = Machine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from machines and parentmachines
-        return view('dashboard.machines.index', compact('machines', 'parentmachines'));
+        return view('pages.admin.machines.index', compact('machines'));
     }
 
     /**
@@ -25,7 +24,8 @@ class MachineController extends Controller
      */
     public function create()
     {
-        //
+        $parentmachines = ParentMachine::get();
+        return view('pages.admin.machines.create', compact('parentmachines'));
     }
 
     /**
@@ -44,7 +44,7 @@ class MachineController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('machine.index')
+        return redirect()->route('machines.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -83,7 +83,7 @@ class MachineController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('machine.index')
+        return redirect()->route('machines.index')
             ->with('success', 'Berhasil mengubah data');
     }
 
@@ -95,7 +95,7 @@ class MachineController extends Controller
         $machine->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('machine.index')
+        return redirect()->route('machines.index')
             ->with('success', 'Berhasil menghapus data');
     }
 }

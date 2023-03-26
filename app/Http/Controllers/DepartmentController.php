@@ -12,10 +12,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
+        $departments = Department::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from departments
-        return view('dashboard.departments.index', compact('departments'));
+        return view('pages.admin.departments.index', compact('departments'));
     }
 
     /**
@@ -23,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.departments.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class DepartmentController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('department.index')
+        return redirect()->route('departments.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -75,7 +75,7 @@ class DepartmentController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('department.index')
+        return redirect()->route('departments.index')
             ->with('success', 'Berhasil mengubah data');
     }
 
@@ -87,7 +87,7 @@ class DepartmentController extends Controller
         $department->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('department.index')
+        return redirect()->route('departments.index')
             ->with('success', 'Berhasil menghapus data');
     }
 }

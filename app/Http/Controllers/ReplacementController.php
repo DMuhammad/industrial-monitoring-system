@@ -23,7 +23,7 @@ class ReplacementController extends Controller
         $partmachines = PartMachine::get();
 
         // return view to index with data from replacements, departments, parentmachines, machines, and partmachines
-        return view('replacements.index', compact('replacements', 'departments', 'parentmachines', 'machines', 'partmachines'));
+        return view('pages.replacements.index', compact('replacements', 'departments', 'parentmachines', 'machines', 'partmachines'));
     }
 
     /**

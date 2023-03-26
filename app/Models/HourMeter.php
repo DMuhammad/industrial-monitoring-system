@@ -10,7 +10,7 @@ class HourMeter extends Model
     use HasFactory;
 
     protected $fillable = [
-        'department_id', 'parent_id', 'user_id', 'base_hourmeter'
+        'department_id', 'parent_id', 'user_id', 'hourmeter'
     ];
 
     protected $hidden = [

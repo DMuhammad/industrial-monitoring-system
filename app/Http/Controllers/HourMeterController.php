@@ -15,11 +15,9 @@ class HourMeterController extends Controller
     public function index()
     {
         $hourmeters = HourMeter::get();
-        $departments = Department::get();
-        $parentmachines = ParentMachine::get();
 
         // return view to index with data from hourmeters, departments, and parentmachines
-        return view('hour-meters.index', compact('hourmeters', 'departments', 'parentmachines'));
+        return view('pages.hour_meters.index', compact('hourmeters'));
     }
 
     /**
@@ -27,7 +25,9 @@ class HourMeterController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::get();
+
+        return view('pages.hour_meters.create', compact('departments'));
     }
 
     /**
@@ -39,18 +39,21 @@ class HourMeterController extends Controller
             'department_id'     =>  ['required'],
             'parent_id'         =>  ['required'],
             'user_id'           =>  ['required'],
-            'base_hourmeter'    =>  ['required', 'Integer']
+            'input_date'        =>  ['required', 'date'],
+            'hourmeter'    =>  ['required', 'Integer']
         ]);
 
         $hourmeter = HourMeter::create([
             'department_id'     =>  $request->get('department_id'),
             'parent_id'         =>  $request->get('parent_id'),
             'user_id'           =>  $request->get('user_id'),
-            'base_hourmeter'    =>  $request->get('base_hourmeter')
+            'input_date'        =>  $request->get('input_date'),
+
+            'hourmeter'    =>  $request->get('hourmeter')
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('hourmeter.index')
+        return redirect()->route('hourmeters.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -59,7 +62,6 @@ class HourMeterController extends Controller
      */
     public function show(HourMeter $hourMeter)
     {
-        //
     }
 
     /**
@@ -82,17 +84,17 @@ class HourMeterController extends Controller
         $this->validate($request, [
             'department_id'     =>  ['required'],
             'parent_id'         =>  ['required'],
-            'base_hourmeter'    =>  ['required', 'Integer']
+            'hourmeter'    =>  ['required', 'Integer']
         ]);
 
         $hourmeter->update([
             'department_id'     =>  $request->get('department_id'),
             'parent_id'         =>  $request->get('parent_id'),
-            'base_hourmeter'    =>  $request->get('base_hourmeter')
+            'hourmeter'    =>  $request->get('hourmeter')
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('hourmeter.index')
+        return redirect()->route('hourmeters.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 
@@ -104,7 +106,7 @@ class HourMeterController extends Controller
         $hourMeter->delete();
 
         // redirect to index and bring message success
-        return redirect()->route('hourmeter.index')
+        return redirect()->route('hourmeters.index')
             ->with('success', 'Berhasil menambahkan data');
     }
 }
