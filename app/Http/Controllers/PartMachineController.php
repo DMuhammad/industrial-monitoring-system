@@ -13,7 +13,7 @@ class PartMachineController extends Controller
      */
     public function index()
     {
-        $partmachines = PartMachine::get();
+        $partmachines = PartMachine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from partmachines
         return view('pages.admin.part_machines.index', compact('partmachines'));
@@ -37,13 +37,13 @@ class PartMachineController extends Controller
     {
         $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
-            'standart_hourmeter'    =>  ['required', 'Integer'],
+            'standard_hourmeter'    =>  ['required', 'Integer'],
             'machine_id'            =>  ['required']
         ]);
 
         $partMachine = PartMachine::create([
             'part_name'             =>  $request->get('part_name'),
-            'standart_hourmeter'    =>  $request->get('standart_hourmeter'),
+            'standard_hourmeter'    =>  $request->get('standard_hourmeter'),
             'machine_id'            =>  $request->get('machine_id')
         ]);
 

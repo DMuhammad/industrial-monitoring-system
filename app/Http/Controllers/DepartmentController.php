@@ -12,8 +12,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        // return view to index
-        return view('pages.admin.departments.index');
+        $departments = Department::orderBy('created_at', 'desc')->get();
+
+        // return view to index with data from departments
+        return view('pages.admin.departments.index', compact('departments'));
     }
 
     /**

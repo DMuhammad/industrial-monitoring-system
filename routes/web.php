@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DropDownController;
+use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
@@ -37,9 +37,10 @@ Route::middleware('auth')->group(function () {
         'replacements'      => ReplacementController::class,
     ]);
 
-    Route::get('parentmachine', [DropDownController::class, 'getParentMachine'])->name('parentmachine');
-    Route::get('machine', [DropDownController::class, 'getMachine'])->name('machine');
-    Route::get('partmachine', [DropDownController::class, 'getPartMachine'])->name('partmachine');
+    // Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
+    Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
+    Route::get('machine/{id}', [DropdownController::class, 'getMachine']);
+    Route::get('partmachine/{id}', [DropdownController::class, 'getPartMachine']);
 
     Route::get('logout', LogoutController::class)->name('logout');
 });

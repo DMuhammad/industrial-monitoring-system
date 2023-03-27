@@ -19,7 +19,7 @@ class Machine extends Model
 
     public function parentmachine()
     {
-        return $this->belongsTo(ParentMachine::class);
+        return $this->belongsTo(ParentMachine::class, 'parent_id', 'id');
     }
 
     public function partmachines()

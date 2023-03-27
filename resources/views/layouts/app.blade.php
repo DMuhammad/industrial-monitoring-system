@@ -8,10 +8,13 @@
     <title>Sistem Monitoring</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap">
-
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/simple-datatables/simple-datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 </head>
 
 <body>
@@ -27,9 +30,124 @@
         </div>
     </div>
 
-
+    <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#department_id').on('change', function() {
+                let id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        url: '/parentmachine/' + id,
+                        type: "GET",
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                $('#parent_id').append('<option value="' +
+                                    value.id + '">' + value.parent_name +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#parent_id').empty();
+                }
+            });
+
+            $('#parent_id').on('change', function() {
+                let id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        url: '/machines/' + id,
+                        type: "GET",
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                $('#machine_id').append('<option value="' +
+                                    value.id + '">' + value.parent_name +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#machine_id').empty();
+                }
+            });
+
+            // $('#machine_id').on('change', function() {
+            //     let id = $(this).val();
+            //     if (id) {
+            //         $.ajax({
+            //             url: '/partmachine/' + id,
+            //             type: "GET",
+            //             success: function(data) {
+            //                 $.each(data, function(key, value) {
+            //                     $('#part_id').append('<option value="' +
+            //                         value.id + '">' + value.parent_name +
+            //                         '</option>'
+            //                     );
+            //                 });
+            //             }
+            //         });
+            //     } else {
+            //         $('#part_id').empty();
+            //     }
+            // });
+
+            $(".select-item").select2({
+                allowClear: true,
+            });
+        });
+    </script>
+
+    <script>
+        const table = document.querySelector('#simple-datatables');
+        const dataTable = new simpleDatatables.DataTable(table);
+    </script>
+
+    <script>
+        function handleDelete(e) {
+            e.preventDefault();
+            const form = document.querySelector('.form-delete');
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Data Anda Tidak Dapat di Kembalikan",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#adb5bd',
+                confirmButtonText: 'Hapus',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        "Deleted!", "Data Anda Berhasil Dihapus.", "success"
+                    )
+                    form.submit();
+                }
+            })
+        }
+
+        function handleCreate() {
+            Swal.fire(
+                'Created!',
+                'Berhasil Dibuat!',
+                'success'
+            )
+        }
+
+        function handleUpdate() {
+            Swal.fire(
+                'Updated!',
+                'Berhasil Diubah!',
+                'success'
+            )
+        }
+    </script>
 </body>
 
 </html>

@@ -10,7 +10,7 @@ class PartMachine extends Model
     use HasFactory;
 
     protected $fillable = [
-        'part_name', 'machine_id', 'standart_hourmeter'
+        'part_name', 'machine_id', 'standard_hourmeter'
     ];
 
     protected $hidden = [

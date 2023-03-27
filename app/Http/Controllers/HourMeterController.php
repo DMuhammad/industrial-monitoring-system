@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\HourMeter;
+use App\Models\ParentMachine;
 use Illuminate\Http\Request;
 
 class HourMeterController extends Controller
@@ -36,17 +37,19 @@ class HourMeterController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'department_id'     =>  ['required'],
-            'parent_id'         =>  ['required'],
-            'user_id'           =>  ['required'],
-            'hourmeter'         =>  ['required', 'Integer']
+            'department_id'     => ['required'],
+            'parent_id'         => ['required'],
+            'user_id'           => ['required'],
+            'hourmeter'         => ['required', 'Integer'],
+            'input_date'        => ['required', 'date']
         ]);
 
         $hourmeter = HourMeter::create([
             'department_id'     =>  $request->get('department_id'),
             'parent_id'         =>  $request->get('parent_id'),
             'user_id'           =>  $request->get('user_id'),
-            'hourmeter'         =>  $request->get('hourmeter')
+            'hourmeter'         =>  $request->get('hourmeter'),
+            'input_date'        =>  $request->get('input_date')
         ]);
 
         // redirect to index and bring message success
@@ -57,9 +60,8 @@ class HourMeterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HourMeter $hourMeter)
+    public function show()
     {
-        //
     }
 
     /**
@@ -68,9 +70,10 @@ class HourMeterController extends Controller
     public function edit(HourMeter $hourmeter)
     {
         $departments = Department::get();
+        $parentmachines = ParentMachine::where('department_id', $hourmeter->department_id)->get();
 
         // return view to edit with data from hourmeter, and departments
-        return view('hour_meters.edit', compact('hourmeter', 'departments'));
+        return view('pages.hour_meters.edit', compact('hourmeter', 'departments', 'parentmachines'));
     }
 
     /**
@@ -81,13 +84,15 @@ class HourMeterController extends Controller
         $this->validate($request, [
             'department_id'     =>  ['required'],
             'parent_id'         =>  ['required'],
-            'hourmeter'         =>  ['required', 'Integer']
+            'hourmeter'         =>  ['required', 'Integer'],
+            'input_date'        => ['required', 'date']
         ]);
 
         $hourmeter->update([
             'department_id'     =>  $request->get('department_id'),
             'parent_id'         =>  $request->get('parent_id'),
-            'hourmeter'         =>  $request->get('hourmeter')
+            'hourmeter'         =>  $request->get('hourmeter'),
+            'input_date'        =>  $request->get('input_date')
         ]);
 
         // redirect to index and bring message success
@@ -98,9 +103,9 @@ class HourMeterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HourMeter $hourMeter)
+    public function destroy(HourMeter $hourmeter)
     {
-        $hourMeter->delete();
+        $hourmeter->delete();
 
         // redirect to index and bring message success
         return redirect()->route('hourmeters.index')

@@ -10,7 +10,7 @@ class Replacement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'department_id', 'parent_id', 'machine_id', 'part_id', 'user_id', 'replacement_hourmeter'
+        'department_id', 'parent_id', 'machine_id', 'part_id', 'user_id', 'replacement_hourmeter', 'input_date'
     ];
 
     protected $hidden = [
@@ -25,7 +25,7 @@ class Replacement extends Model
     public function parentmachine()
     {
         return $this->belongsTo(ParentMachine::class);
-    }
+    }   
 
     public function machine()
     {

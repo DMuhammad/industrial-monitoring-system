@@ -13,7 +13,7 @@ class MachineController extends Controller
      */
     public function index()
     {
-        $machines = Machine::get();
+        $machines = Machine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from machines
         return view('pages.admin.machines.index', compact('machines'));

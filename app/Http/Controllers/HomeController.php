@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\ParentMachine;
+use App\Models\Machine;
+use App\Models\PartMachine;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,6 +16,11 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('pages.dashboard');
+        $departments = Department::count();
+        $parentmachines = ParentMachine::count();
+        $machines = Machine::count();
+        $partmachines = PartMachine::count();
+
+        return view('dashboard', compact('departments', 'parentmachines', 'machines', 'partmachines'));
     }
 }

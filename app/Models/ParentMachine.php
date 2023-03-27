@@ -24,7 +24,7 @@ class ParentMachine extends Model
 
     public function hourmeter()
     {
-        return $this->hasOne(HourMeter::class);
+        return $this->hasMany(HourMeter::class);
     }
 
     public function machines()

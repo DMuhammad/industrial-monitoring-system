@@ -1,14 +1,7 @@
-.img-profile {
-    height: 2rem;
-    width: 2rem;
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
 }
 
-.avatar[data-initial]::before {
-    color: currentColor;
-    content: attr(data-initial);
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+.card-size {
+    height: 125px;
 }
