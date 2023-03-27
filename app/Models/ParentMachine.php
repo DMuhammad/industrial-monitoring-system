@@ -24,12 +24,12 @@ class ParentMachine extends Model
 
     public function hourmeter()
     {
-        return $this->hasOne(HourMeter::class);
+        return $this->hasMany(HourMeter::class);
     }
 
     public function machines()
     {
-        return $this->hasMany(Machine::class, 'id', 'parent_id');
+        return $this->hasMany(Machine::class);
     }
 
     public function replacements()

@@ -35,7 +35,8 @@
                                     <td>{{ $machine->machine_name }}</td>
                                     <td>{{ $machine->parentmachine->parent_name }}</td>
                                     <td>
-                                        <form action="{{ route('machines.destroy', $machine->id) }}" method="post">
+                                        <form action="{{ route('machines.destroy', $machine->id) }}" method="post"
+                                            class="form-delete">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">

@@ -13,7 +13,7 @@ class PartMachineController extends Controller
      */
     public function index()
     {
-        $partmachines = PartMachine::get();
+        $partmachines = PartMachine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from partmachines
         return view('pages.admin.part_machines.index', compact('partmachines'));

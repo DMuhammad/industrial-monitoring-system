@@ -29,7 +29,8 @@
                                     <td>{{ number_format($partmachine->standard_hourmeter) }}</td>
                                     <td>{{ $partmachine->machine->machine_name }}</td>
                                     <td>
-                                        <form action="{{ route('partmachines.destroy', $partmachine->id) }}" method="post">
+                                        <form action="{{ route('partmachines.destroy', $partmachine->id) }}" method="post"
+                                            class="form-delete">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">

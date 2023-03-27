@@ -28,7 +28,7 @@
                                     <td>{{ $parentmachine->department->department_name }}</td>
                                     <td>
                                         <form action="{{ route('parentmachines.destroy', $parentmachine->id) }}"
-                                            method="post">
+                                            method="post" class="form-delete">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">

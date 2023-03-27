@@ -40,7 +40,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="input_date" class="form-label">Input Date</label>
-                            <input type="date" class="form-control datepicker @error('input_date') is_invalid @enderror"
+                            <input type="date" class="form-control @error('input_date') is_invalid @enderror"
                                 id="input_date" name="input_date" value="{{ date('Y-m-d') }}" required>
                             @error('input_date')
                                 <div class="invalid-feedback">

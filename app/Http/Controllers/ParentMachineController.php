@@ -13,7 +13,7 @@ class ParentMachineController extends Controller
      */
     public function index()
     {
-        $parentmachines = ParentMachine::get();
+        $parentmachines = ParentMachine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from parentmachines
         return view('pages.admin.parent_machines.index', compact('parentmachines'));

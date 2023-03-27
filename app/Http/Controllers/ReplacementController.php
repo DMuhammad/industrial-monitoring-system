@@ -27,10 +27,10 @@ class ReplacementController extends Controller
      */
     public function create()
     {
-        $replacements = Replacement::get();
+        $departments = Department::get();
 
-        // return view to index with data from replacements
-        return view('pages.replacements.create', compact('replacements'));
+        // return view to index with data from departments
+        return view('pages.replacements.create', compact('departments'));
     }
 
     /**

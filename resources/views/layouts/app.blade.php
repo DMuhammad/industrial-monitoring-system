@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/simple-datatables/simple-datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/datepicker/css/datepicker.material.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
@@ -36,22 +35,22 @@
     <script src="{{ asset('vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('vendor/datepicker/datepicker.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         $(document).ready(function() {
             $('#department_id').on('change', function() {
-                var id = $(this).val();
+                let id = $(this).val();
                 if (id) {
                     $.ajax({
-                        url: '/parentdropdown/' + id,
+                        url: '/parentmachine/' + id,
                         type: "GET",
-                        dataType: "json",
                         success: function(data) {
                             $.each(data, function(key, value) {
                                 $('#parent_id').append('<option value="' +
-                                    key + '">' + value.parent_name + '</option>');
+                                    value.id + '">' + value.parent_name +
+                                    '</option>'
+                                );
                             });
                         }
                     });
@@ -60,6 +59,45 @@
                 }
             });
 
+            $('#parent_id').on('change', function() {
+                let id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        url: '/machines/' + id,
+                        type: "GET",
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                $('#machine_id').append('<option value="' +
+                                    value.id + '">' + value.parent_name +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#machine_id').empty();
+                }
+            });
+
+            // $('#machine_id').on('change', function() {
+            //     let id = $(this).val();
+            //     if (id) {
+            //         $.ajax({
+            //             url: '/partmachine/' + id,
+            //             type: "GET",
+            //             success: function(data) {
+            //                 $.each(data, function(key, value) {
+            //                     $('#part_id').append('<option value="' +
+            //                         value.id + '">' + value.parent_name +
+            //                         '</option>'
+            //                     );
+            //                 });
+            //             }
+            //         });
+            //     } else {
+            //         $('#part_id').empty();
+            //     }
+            // });
 
             $(".select-item").select2({
                 allowClear: true,
@@ -73,18 +111,9 @@
     </script>
 
     <script>
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true,
-        })
-    </script>
-
-    <script>
         function handleDelete(e) {
             e.preventDefault();
-            const form = e.target.form;
-
+            const form = document.querySelector('.form-delete');
             Swal.fire({
                 title: 'Apakah Anda Yakin?',
                 text: "Data Anda Tidak Dapat di Kembalikan",
@@ -107,6 +136,14 @@
             Swal.fire(
                 'Created!',
                 'Berhasil Dibuat!',
+                'success'
+            )
+        }
+
+        function handleUpdate() {
+            Swal.fire(
+                'Updated!',
+                'Berhasil Diubah!',
                 'success'
             )
         }

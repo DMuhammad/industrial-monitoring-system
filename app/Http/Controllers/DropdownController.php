@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\Machine;
 use App\Models\ParentMachine;
+use App\Models\PartMachine;
+use Illuminate\Http\Request;
 
 class DropdownController extends Controller
 {
@@ -18,7 +21,7 @@ class DropdownController extends Controller
 
     public function getMachine(Request $request)
     {
-        $machines = Machine::where('parent_id', $request->parent_id)->get();
+        $machines = Machine::where('parent_id', $request->id)->get();
 
         if (count($machines) > 0) {
             return response()->json($machines);
@@ -27,7 +30,7 @@ class DropdownController extends Controller
 
     public function getPartMachine(Request $request)
     {
-        $partmachines = Machine::where('machine_id', $request->machine_id)->get();
+        $partmachines = PartMachine::where('machine_id', $request->id)->get();
 
         if (count($partmachines) > 0) {
             return response()->json($partmachines);

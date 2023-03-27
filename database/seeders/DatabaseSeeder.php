@@ -31,6 +31,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Department::factory(10)->create();
-        // ParentMachine::factory(30)->create();
     }
 }

@@ -18,7 +18,7 @@
                                 <th>Department</th>
                                 <th>Parent</th>
                                 <th>Hour Meter</th>
-                                <th>Created At</th>
+                                <th>Date</th>
                                 <th data-sortable="false">Action</th>
                             </tr>
                         </thead>
@@ -26,20 +26,28 @@
                             @foreach ($hourmeters as $hourmeter)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $hourmeters->department->department_name }}</td>
-                                    <td>{{ $hourmeters->parentmachine->parent_name }}</td>
-                                    <td>{{ $hourmeters->base_hourmeter }}</td>
-                                    <td>{{ $hourmeters->created_at }}</td>
+                                    <td>{{ $hourmeter->department->department_name }}</td>
+                                    <td>{{ $hourmeter->parentmachine->parent_name }}</td>
+                                    <td>{{ number_format($hourmeter->hourmeter) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($hourmeter->input_date)) }}</td>
                                     <td>
-                                        <form action="{{ route('parentmachines.destroy', $parentmachine->id) }}"
-                                            method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger btn-delete">
-                                                <i class="far fa-trash-alt mx-lg-1"></i>
-                                                <span class="d-none d-sm-inline-block">Delete</span>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <a href="{{ route('hourmeters.edit', $hourmeter->id) }}"
+                                                class="btn btn-warning">
+                                                <i class="fas fa-edit mx-lg-1"></i>
+                                                <span class="d-none d-sm-inline-block">Edit</span>
+                                            </a>
+                                            <form class="form-delete"
+                                                action="{{ route('hourmeters.destroy', $hourmeter->id) }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-delete"
+                                                    onclick="handleDelete(event)">
+                                                    <i class="far fa-trash-alt mx-lg-1"></i>
+                                                    <span class="d-none d-sm-inline-block">Delete</span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

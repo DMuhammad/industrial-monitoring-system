@@ -16,7 +16,7 @@
                                 id="department_name" name="department_name" value="{{ old('department_name') }}" autofocus
                                 required>
                             @error('department_name')
-                                <div class="invalid-feedback">
+                                <div class="">
                                     {{ $message }}
                                 </div>
                             @enderror
