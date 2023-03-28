@@ -10,7 +10,6 @@
                     </div>
                     <form action="{{ route('register.store') }}" class="mt-4" method="POST">
                         @csrf
-
                         <!-- Form Name-->
                         <div class="form-group mt-4 mb-4">
                             <label for="name">Your Name</label>
@@ -18,14 +17,15 @@
                                 <span class="input-group-text text-secondary" id="basic-addon3">
                                     <i class="align-middle" data-feather="user"></i>
                                 </span>
-                                <input id="name" type="text" name="name" class="form-control"
-                                    placeholder="Full Name" value="{{ old('name') }}" autofocus required>
+                                <input id="name" type="text" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" placeholder="Full Name"
+                                    value="{{ old('name') }}" required>
+                                @error('name')
+                                    <span class="invalid-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <!-- End of Form -->
 
@@ -36,14 +36,15 @@
                                 <span class="input-group-text text-secondary" id="basic-addon3">
                                     <i class="align-middle" data-feather="mail"></i>
                                 </span>
-                                <input id="email" type="email" name="email" class="form-control"
-                                    placeholder="name@example.com" value="{{ old('email') }}" autofocus required>
+                                <input id="email" type="email" name="email"
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="name@example.com"
+                                    value="{{ old('email') }}" required>
+                                @error('email')
+                                    <span class="invalid-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <!-- End of Form -->
 
@@ -54,26 +55,33 @@
                                 <span class="input-group-text text-secondary" id="basic-addon4">
                                     <i class="align-middle" data-feather="lock"></i>
                                 </span>
-                                <input id="password" type="password" name="password" class="form-control"
-                                    placeholder="Password" required>
+                                <input id="password" type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    required autocomplete="current-password">
+                                @error('password')
+                                    <span class="invalid-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <!-- End of Form -->
 
                         <!-- Form Confirm Password -->
                         <div class="form-group mb-4">
-                            <label for="password_confirmation">Confirm Password</label>
+                            <label for="password">Confirm Password</label>
                             <div class="input-group">
                                 <span class="input-group-text text-secondary" id="basic-addon5">
                                     <i class="align-middle" data-feather="lock"></i>
                                 </span>
-                                <input id="password_confirmation" name="password_confirmation" type="password"
-                                    class="form-control" placeholder="Confirm Password" required>
+                                <input id="password" name="password_confirmation" type="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Confirm Password" required autocomplete="current-password">
+                                @error('password')
+                                    <span class="invalid-feedback">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- End of Form -->

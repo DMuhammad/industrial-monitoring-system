@@ -25,7 +25,7 @@ class RegisterController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
 
@@ -45,7 +45,10 @@ class RegisterController extends Controller
 
             // redirect to login and bring message success
             return redirect()->route('login.index')
-                ->with('success', 'Silahkan Login');
+                ->with('success', 'Register berhasil! Silahkan login');
+        } else {
+            return back()->with('error', 'Register gagal! Silahkan coba lagi');
         }
+
     }
 }
