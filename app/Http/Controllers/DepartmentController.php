@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
 {
@@ -33,7 +34,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'department_name' => ['required', 'string']
+            'department_name' => ['required', 'string', 'unique:departments']
         ]);
 
         $department = Department::create([
@@ -41,8 +42,11 @@ class DepartmentController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('departments.index')
-            ->with('success', 'Berhasil menambahkan data');
+        if ($department) {
+            alert()->success('Berhasil', 'Berhasil menambahkan data');
+            
+            return redirect()->route('departments.index');
+        }
     }
 
     /**

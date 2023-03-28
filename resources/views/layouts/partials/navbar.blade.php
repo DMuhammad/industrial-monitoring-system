@@ -19,15 +19,13 @@
                     {{-- <img src="{{ asset('users/'.auth()->user()->id.'/generated_cover.png') }}" class="mr-2" /> --}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="/profile">
-                        <i class="align-middle me-1" data-feather="user"></i> Profile
+                    <a class="dropdown-item" href="{{ route('account.index') }}">
+                        <i class="align-middle me-1" data-feather="user"></i> Account
                     </a>
-                    <a class="dropdown-item" href="/settings">
-                        <i class="align-middle me-1" data-feather="settings"></i> Settings
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="align-middle me-1" data-feather="log-out"></i>
+                        Logout
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout"><i class="align-middle me-1" data-feather="log-out"></i> Log
-                        out</a>
                 </div>
             </li>
         </ul>

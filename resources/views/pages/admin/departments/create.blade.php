@@ -12,17 +12,17 @@
                         @csrf
                         <div class="mb-3">
                             <label for="department_name" class="form-label">Department Name</label>
-                            <input type="text" class="form-control @error('department_name') is_invalid @enderror"
-                                id="department_name" name="department_name" value="{{ old('department_name') }}" autofocus
-                                required>
+                            <input id="text" type="department_name" name="department_name"
+                                class="form-control @error('department_name') is-invalid @enderror"
+                                value="{{ old('department_name') }}" required>
                             @error('department_name')
-                                <div class="">
+                                <span class="invalid-feedback">
                                     {{ $message }}
-                                </div>
+                                </span>
                             @enderror
                         </div>
                         <div class="pt-2 mb-3 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary" onclick="handleCreate()">Save</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                             <a href="{{ route('departments.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>

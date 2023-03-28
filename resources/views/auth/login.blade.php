@@ -20,7 +20,7 @@
                                 </span>
                                 <input id="email" class="form-control @error('email') is-invalid @enderror"
                                     type="email" name="email" placeholder="name@example.com" required
-                                    value="{{ old('email') }}">
+                                    value="{{ old('email') }}" autocomplete="email">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -38,7 +38,7 @@
                                     <i class="align-middle" data-feather="lock"></i>
                                 </span>
                                 <input id="password" class="form-control" type="password" name="password"
-                                    placeholder="Password" required>
+                                    placeholder="Password" required autocomplete="current-password">
                             </div>
                         </div>
                         <!-- End of Form -->

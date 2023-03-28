@@ -69,7 +69,7 @@
 
                         <!-- Form Confirm Password -->
                         <div class="form-group mb-4">
-                            <label for="password">Confirm Password</label>
+                            <label for="password_confirmation">Confirm Password</label>
                             <div class="input-group">
                                 <span class="input-group-text text-secondary" id="basic-addon5">
                                     <i class="align-middle" data-feather="lock"></i>

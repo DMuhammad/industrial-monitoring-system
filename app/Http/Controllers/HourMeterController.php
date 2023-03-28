@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\HourMeter;
 use App\Models\ParentMachine;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HourMeterController extends Controller
 {
@@ -53,8 +54,10 @@ class HourMeterController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('hourmeters.index')
-            ->with('success', 'Berhasil menambahkan data');
+        if ($hourmeter) {
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
+            return redirect()->route('hourmeters.index');
+        }
     }
 
     /**
@@ -96,8 +99,11 @@ class HourMeterController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('hourmeters.index')
-            ->with('success', 'Berhasil mengubah data');
+
+        if ($hourmeter) {
+            Alert::success('Berhasil', 'Berhasil mengubah data');
+            return redirect()->route('hourmeters.index');
+        }
     }
 
     /**

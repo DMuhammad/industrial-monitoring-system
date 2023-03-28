@@ -61,46 +61,6 @@
                 }
             });
 
-            $('#parent_id').on('change', function() {
-                let id = $(this).val();
-                if (id) {
-                    $.ajax({
-                        url: '/machines/' + id,
-                        type: "GET",
-                        success: function(data) {
-                            $.each(data, function(key, value) {
-                                $('#machine_id').append('<option value="' +
-                                    value.id + '">' + value.parent_name +
-                                    '</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('#machine_id').empty();
-                }
-            });
-
-            // $('#machine_id').on('change', function() {
-            //     let id = $(this).val();
-            //     if (id) {
-            //         $.ajax({
-            //             url: '/partmachine/' + id,
-            //             type: "GET",
-            //             success: function(data) {
-            //                 $.each(data, function(key, value) {
-            //                     $('#part_id').append('<option value="' +
-            //                         value.id + '">' + value.parent_name +
-            //                         '</option>'
-            //                     );
-            //                 });
-            //             }
-            //         });
-            //     } else {
-            //         $('#part_id').empty();
-            //     }
-            // });
-
             $(".select-item").select2({
                 allowClear: true,
             });
@@ -113,6 +73,8 @@
     </script>
 
     <script>
+        @include('sweetalert::alert')
+
         function handleDelete(e) {
             e.preventDefault();
             const form = document.querySelector('.form-delete');
@@ -133,31 +95,19 @@
                 }
             })
         }
-
-        function handleCreate() {
-            Swal.fire(
-                'Created!',
-                'Berhasil Dibuat!',
-                'success'
-            )
-        }
-
-        function handleUpdate() {
-            Swal.fire(
-                'Updated!',
-                'Berhasil Diubah!',
-                'success'
-            )
-        }
     </script>
 
     <script>
-        toastr.options.timeOut = 4000;
-        @if (Session::has('error'))
-            toastr.error('{{ Session::get('error') }}');
-        @elseif (Session::has('success'))
-            toastr.success('{{ Session::get('success') }}');
-        @endif
+        console.log(window.location.pathname);
+
+        if (window.location.pathname == '/') {
+            toastr.options.timeOut = 4000;
+            @if (Session::has('error'))
+                toastr.error('{{ Session::get('error') }}');
+            @elseif (Session::has('success'))
+                toastr.success('{{ Session::get('success') }}');
+            @endif
+        }
     </script>
 </body>
 

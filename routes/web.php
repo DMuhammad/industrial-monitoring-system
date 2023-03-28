@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\DropDownController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
@@ -36,9 +37,11 @@ Route::middleware('auth')->group(function () {
         'hourmeters'       => HourMeterController::class,
         'replacements'      => ReplacementController::class,
     ]);
-
+    
+    Route::resource('account', AccountController::class);
+    
     // Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
-    Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
+    Route::get('parentmachine/{id}', [DropDownController::class, 'getParentMachine']);
     Route::get('machine/{id}', [DropdownController::class, 'getMachine']);
     Route::get('partmachine/{id}', [DropdownController::class, 'getPartMachine']);
 

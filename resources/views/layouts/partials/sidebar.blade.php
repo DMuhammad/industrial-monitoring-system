@@ -12,12 +12,6 @@
                         <span class="align-middle">Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('profile') ? 'active' : '' }}">
-                    <a class="sidebar-link" href="/profile">
-                        <i class="fas fa-user "></i>
-                        <span class="align-middle">Profile</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('departments*') ? 'active' : '' }}">
                     <a class="sidebar-link" href="/departments">
                         <i class="fas fa-th-large "></i>
