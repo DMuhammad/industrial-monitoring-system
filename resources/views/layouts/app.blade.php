@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/simple-datatables/simple-datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
@@ -35,69 +36,58 @@
     <script src="{{ asset('vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         $(document).ready(function() {
-            $('#department_id').on('change', function() {
-                let id = $(this).val();
-                if (id) {
-                    $.ajax({
-                        url: '/parentmachine/' + id,
-                        type: "GET",
-                        success: function(data) {
-                            $.each(data, function(key, value) {
-                                $('#parent_id').append('<option value="' +
-                                    value.id + '">' + value.parent_name +
-                                    '</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('#parent_id').empty();
-                }
+            $('#department_id').on('change', function () {
+                let departmentId = this.value;
+                $('#parent_id').html('');
+                $.ajax({
+                    url: '{{ route('parentmachine') }}?department_id='+departmentId,
+                    type: 'get',
+                    success: function (res) {
+                        $('#parent_id').html('<option value="">Select Parent Machine</option>');
+                        $.each(res, function (key, value) {
+                            $('#parent_id').append('<option value="' + value
+                                .id + '">' + value.parent_name + '</option>');
+                        });
+                    }
+                });
             });
 
-            $('#parent_id').on('change', function() {
-                let id = $(this).val();
-                if (id) {
-                    $.ajax({
-                        url: '/machines/' + id,
-                        type: "GET",
-                        success: function(data) {
-                            $.each(data, function(key, value) {
-                                $('#machine_id').append('<option value="' +
-                                    value.id + '">' + value.parent_name +
-                                    '</option>'
-                                );
-                            });
-                        }
-                    });
-                } else {
-                    $('#machine_id').empty();
-                }
+            $('#parent_id').on('change', function () {
+                let parentId = this.value;
+                $('#machine_id').html('');
+                $.ajax({
+                    url: '{{ route('machine') }}?parent_id='+parentId,
+                    type: 'get',
+                    success: function (res) {
+                        $('#machine_id').html('<option value="">Select Machine</option>');
+                        $.each(res, function (key, value) {
+                            $('#machine_id').append('<option value="' + value
+                                .id + '">' + value.machine_name + '</option>');
+                        });
+                    }
+                });
             });
 
-            // $('#machine_id').on('change', function() {
-            //     let id = $(this).val();
-            //     if (id) {
-            //         $.ajax({
-            //             url: '/partmachine/' + id,
-            //             type: "GET",
-            //             success: function(data) {
-            //                 $.each(data, function(key, value) {
-            //                     $('#part_id').append('<option value="' +
-            //                         value.id + '">' + value.parent_name +
-            //                         '</option>'
-            //                     );
-            //                 });
-            //             }
-            //         });
-            //     } else {
-            //         $('#part_id').empty();
-            //     }
-            // });
+            $('#machine_id').on('change', function () {
+                let machineId = this.value;
+                $('#part_id').html('');
+                $.ajax({
+                    url: '{{ route('partmachine') }}?machine_id='+machineId,
+                    type: 'get',
+                    success: function (res) {
+                        $('#part_id').html('<option value="">Select Part Machine</option>');
+                        $.each(res, function (key, value) {
+                            $('#part_id').append('<option value="' + value
+                                .id + '">' + value.part_name + '</option>');
+                        });
+                    }
+                });
+            });
 
             $(".select-item").select2({
                 allowClear: true,
@@ -111,6 +101,8 @@
     </script>
 
     <script>
+        @include('sweetalert::alert')
+
         function handleDelete(e) {
             e.preventDefault();
             const form = document.querySelector('.form-delete');
@@ -131,21 +123,18 @@
                 }
             })
         }
+    </script>
 
-        function handleCreate() {
-            Swal.fire(
-                'Created!',
-                'Berhasil Dibuat!',
-                'success'
-            )
-        }
+    <script>
+        console.log(window.location.pathname);
 
-        function handleUpdate() {
-            Swal.fire(
-                'Updated!',
-                'Berhasil Diubah!',
-                'success'
-            )
+        if (window.location.pathname == '/') {
+            toastr.options.timeOut = 4000;
+            @if (Session::has('error'))
+                toastr.error('{{ Session::get('error') }}');
+            @elseif (Session::has('success'))
+                toastr.success('{{ Session::get('success') }}');
+            @endif
         }
     </script>
 </body>

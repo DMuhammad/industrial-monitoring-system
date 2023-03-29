@@ -26,13 +26,8 @@
                                     <td>{{ $department->department_name }}</td>
                                     <td>
                                         <div class="d-flex align-items-center gap-1">
-                                            <a href="{{ route('departments.edit', $department->id) }}"
-                                                class="btn btn-warning">
-                                                <i class="fas fa-edit me-xl-1"></i>
-                                                <span class="d-none d-sm-inline-block">Edit</span>
-                                            </a>
-                                            <form action="{{ route('departments.destroy', $department->id) }}"
-                                                method="post" class="form-delete">
+                                            <form action="{{ route('departments.destroy', $department->id) }}" method="post"
+                                                class="form-delete">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">

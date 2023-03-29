@@ -31,22 +31,24 @@
                                     <td>{{ $replacement->department->department_name }}</td>
                                     <td>{{ $replacement->parentmachine->parent_name }}</td>
                                     <td>{{ $replacement->machine->machine_name }}</td>
-                                    <td>{{ $replacement->part->part_name }}</td>
+                                    <td>{{ $replacement->partmachine->part_name }}</td>
                                     <td>{{ number_format($replacement->replacement_hourmeter) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($replacement->input_date)) }}</td>
                                     <td>
                                         <div class="d-flex align-items-center gap-1">
-                                            <a href="{{ route('replacements.edit', $replacement->id) }}"
-                                                class="badge btn btn-warning border-0 p-2 mx-lg-1">
-                                                <i class="fas fa-edit mx-lg-1"></i>
-                                                <span class="d-none d-sm-inline-block">Edit</span>
-                                            </a>
+                                            @can('admin')
+                                                <a href="{{ route('replacements.edit', $replacement->id) }}"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit mx-lg-1"></i>
+                                                    <span class="d-none d-sm-inline-block">Edit</span>
+                                                </a>
+                                            @endcan
                                             <form class="form-delete"
-                                                action="{{ route('replacements.destroy', $replacement->id) }}"
-                                                method="post">
+                                                action="{{ route('replacements.destroy', $replacement->id) }}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger btn-delete">
+                                                <button type="submit" class="btn btn-danger btn-delete"
+                                                    onclick="handleDelete(event)">
                                                     <i class="far fa-trash-alt mx-lg-1"></i>
                                                     <span class="d-none d-sm-inline-block">Delete</span>
                                                 </button>

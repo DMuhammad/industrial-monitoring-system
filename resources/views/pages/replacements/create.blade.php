@@ -42,8 +42,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="replacement" class="form-label">Replacement Hour Meter</label>
-                            <input type="text" class="form-control @error('replacement') is_invalid @enderror"
-                                id="replacement" name="replacement" value="{{ old('replacement') }}" required>
+                            <input type="text" class="form-control @error('replacement_hourmeter') is_invalid @enderror"
+                                id="replacement" name="replacement_hourmeter" value="{{ old('replacement_hourmeter') }}" required>
                             @error('replacement')
                                 <div class="invalid-feedback">
                                     {{ $message }}

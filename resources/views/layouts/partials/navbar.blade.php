@@ -6,28 +6,20 @@
     <div class="navbar-collapse collapse me-3">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
-                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                    <i class="align-middle" data-feather="settings"></i>
-                </a>
-
-                <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-decoration-none" href="#"
-                    data-bs-toggle="dropdown">
-                    <span class="text-dark me-2">{{ auth()->user()->name }}</span>
-                    {{-- DIKERJAKAN AKHIR -- AVATAR --}}
-                    {{-- <figure class="img-profile rounded-circle avatar font-weight-bold"
-                        data-initial="{{ substr(auth()->user()->name, 0, 1) }}"></figure> --}}
-                    {{-- <img src="{{ asset('users/'.auth()->user()->id.'/generated_cover.png') }}" class="mr-2" /> --}}
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                    <span class="text-dark me-2 d-sm-inline-block d-none">{{ auth()->user()->name }}</span>
+                    <img src="{{ asset('storage/profile/avatar-' . auth()->user()->id . '.png') }}"
+                        alt="{{ 'avatar-' . auth()->user()->id }}" width="33" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="/profile">
-                        <i class="align-middle me-1" data-feather="user"></i> Profile
-                    </a>
-                    <a class="dropdown-item" href="/settings">
-                        <i class="align-middle me-1" data-feather="settings"></i> Settings
+                    <a class="dropdown-item" href="{{ route('account.index') }}">
+                        <i class="align-middle me-1" data-feather="user"></i> Account
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout"><i class="align-middle me-1" data-feather="log-out"></i> Log
-                        out</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="align-middle me-1" data-feather="log-out"></i>
+                        Logout
+                    </a>
                 </div>
             </li>
         </ul>
