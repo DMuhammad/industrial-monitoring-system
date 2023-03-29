@@ -13,9 +13,7 @@ class Replacement extends Model
         'department_id', 'parent_id', 'machine_id', 'part_id', 'user_id', 'replacement_hourmeter', 'input_date'
     ];
 
-    protected $hidden = [
-
-    ];
+    protected $hidden = [];
 
     public function department()
     {
@@ -24,8 +22,8 @@ class Replacement extends Model
 
     public function parentmachine()
     {
-        return $this->belongsTo(ParentMachine::class);
-    }   
+        return $this->belongsTo(ParentMachine::class, 'parent_id', 'id');
+    }
 
     public function machine()
     {
@@ -34,7 +32,7 @@ class Replacement extends Model
 
     public function partmachine()
     {
-        return $this->belongsTo(PartMachine::class);
+        return $this->belongsTo(PartMachine::class, 'part_id', 'id');
     }
 
     public function user()

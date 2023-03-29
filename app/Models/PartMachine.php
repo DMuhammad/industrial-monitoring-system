@@ -13,9 +13,7 @@ class PartMachine extends Model
         'part_name', 'machine_id', 'standard_hourmeter'
     ];
 
-    protected $hidden = [
-
-    ];
+    protected $hidden = [];
 
     public function machine()
     {
@@ -24,6 +22,6 @@ class PartMachine extends Model
 
     public function replacement()
     {
-        return $this->hasOne(Replacement::class);
+        return $this->hasMany(Replacement::class);
     }
 }
