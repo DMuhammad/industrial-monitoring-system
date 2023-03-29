@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Machine;
 use App\Models\PartMachine;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PartMachineController extends Controller
 {
@@ -47,17 +48,12 @@ class PartMachineController extends Controller
             'machine_id'            =>  $request->get('machine_id')
         ]);
 
-        // redirect to index and bring message success
-        return redirect()->route('partmachines.index')
-            ->with('success', 'Berhasil menambahkan data');
-    }
+        if ($partMachine) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(PartMachine $partMachine)
-    {
-        //
+            return redirect()->route('partmachines.index');
+        }
     }
 
     /**

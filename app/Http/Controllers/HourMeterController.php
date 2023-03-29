@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\HourMeter;
 use App\Models\ParentMachine;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HourMeterController extends Controller
 {
@@ -14,7 +15,7 @@ class HourMeterController extends Controller
      */
     public function index()
     {
-        $hourmeters = HourMeter::get();
+        $hourmeters = HourMeter::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from hourmeters
         return view('pages.hour_meters.index', compact('hourmeters'));
@@ -52,16 +53,12 @@ class HourMeterController extends Controller
             'input_date'        =>  $request->get('input_date')
         ]);
 
-        // redirect to index and bring message success
-        return redirect()->route('hourmeters.index')
-            ->with('success', 'Berhasil menambahkan data');
-    }
+        if ($hourmeter) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
+            return redirect()->route('hourmeters.index');
+        }
     }
 
     /**
@@ -85,7 +82,7 @@ class HourMeterController extends Controller
             'department_id'     =>  ['required'],
             'parent_id'         =>  ['required'],
             'hourmeter'         =>  ['required', 'Integer'],
-            'input_date'        => ['required', 'date']
+            'input_date'        =>  ['required', 'date']
         ]);
 
         $hourmeter->update([
@@ -95,9 +92,12 @@ class HourMeterController extends Controller
             'input_date'        =>  $request->get('input_date')
         ]);
 
-        // redirect to index and bring message success
-        return redirect()->route('hourmeters.index')
-            ->with('success', 'Berhasil mengubah data');
+        if ($hourmeter) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil mengubah data');
+
+            return redirect()->route('hourmeters.index');
+        }
     }
 
     /**

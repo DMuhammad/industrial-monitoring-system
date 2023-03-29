@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +23,7 @@ class LoginController extends Controller
     {
         $remember = $request->has('remember') ? true : false;
         $this->validate($request, [
-            'email'     => ['required', 'string', 'email'],
+            'email'     => ['required', 'string', 'email:dns'],
             'password'  => ['required', 'string', 'min:8']
         ]);
         if (Auth::attempt([
@@ -33,11 +32,9 @@ class LoginController extends Controller
         ], $remember)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return redirect('/')->with('success', 'Login berhasil!');
         }
 
-        return back()->withErrors([
-            'email' => 'Password atau Email salah! Silahkan coba lagi',
-        ])->withInput(['email', 'password']);
+        return back()->with('error', 'Login gagal! Silahkan coba lagi');
     }
 }
