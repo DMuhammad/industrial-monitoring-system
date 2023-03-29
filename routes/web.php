@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -37,10 +38,11 @@ Route::middleware('auth')->group(function () {
         'replacements'      => ReplacementController::class,
     ]);
 
-    // Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
-    Route::get('parentmachine/{id}', [DropdownController::class, 'getParentMachine']);
-    Route::get('machine/{id}', [DropdownController::class, 'getMachine']);
-    Route::get('partmachine/{id}', [DropdownController::class, 'getPartMachine']);
+    Route::resource('account', AccountController::class);
+
+    Route::get('parentmachine', [DropDownController::class, 'getParentMachine'])->name('parentmachine');
+    Route::get('machine', [DropDownController::class, 'getMachine'])->name('machine');
+    Route::get('partmachine', [DropDownController::class, 'getPartMachine'])->name('partmachine');
 
     Route::get('logout', LogoutController::class)->name('logout');
 });
