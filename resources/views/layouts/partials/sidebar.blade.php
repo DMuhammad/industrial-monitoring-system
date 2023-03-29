@@ -14,13 +14,13 @@
                 </li>
                 <li class="sidebar-item {{ Request::is('departments*') ? 'active' : '' }}">
                     <a class="sidebar-link" href="/departments">
-                        <i class="fas fa-th-large "></i>
+                        <i class="fas fa-industry "></i>
                         <span class="align-middle ">Departments</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('parentmachines*') ? 'active' : '' }}">
                     <a class="sidebar-link" href="/parentmachines">
-                        <i class="fas fa-car "></i>
+                        <i class="fas fa-th-large "></i>
                         <span class="align-middle">Parent Machines</span>
                     </a>
                 </li>

@@ -12,7 +12,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="department_name" class="form-label">Department Name</label>
-                            <input id="text" type="department_name" name="department_name"
+                            <input id="department_name" type="text" name="department_name"
                                 class="form-control @error('department_name') is-invalid @enderror"
                                 value="{{ old('department_name') }}" required>
                             @error('department_name')

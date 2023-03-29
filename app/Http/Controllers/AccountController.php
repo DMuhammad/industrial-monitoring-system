@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
 {
@@ -50,9 +52,14 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         
+
+        if ($user) {
+            Alert::success('Berhasil', 'Berhasil mengubah data');
+            return redirect()->route('home');
+        }
     }
 
     /**

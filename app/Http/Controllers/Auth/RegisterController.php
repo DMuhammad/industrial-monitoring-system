@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Laravolt\Avatar\Avatar;
-use Illuminate\Support\Facades\Storage;
+use Laravolt\Avatar\Facade as Avatar;
 
 class RegisterController extends Controller
 {
@@ -36,12 +35,7 @@ class RegisterController extends Controller
         ]);
 
         if ($user) {
-            // DIKERJAKAN AKHIR -- AVATAR
-            // Storage::disk('local')->makeDirectory('public/users/' . $user->id);
-            // $avatar = new Avatar();
-            // $avatar->create($user->name)
-            //     ->setDimension(100, 100)
-            //     ->save(storage_path() . '/app/public/users/' . $user->id . '/generated_cover.png');
+            Avatar::create($user->name)->save('storage/profile/avatar-' . $user->id . '.png', 100);
 
             // redirect to login and bring message success
             return redirect()->route('login.index')

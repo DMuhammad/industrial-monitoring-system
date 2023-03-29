@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,6 +213,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
+    'Avatar'    => Laravolt\Avatar\Facade::class,
 
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 ];
