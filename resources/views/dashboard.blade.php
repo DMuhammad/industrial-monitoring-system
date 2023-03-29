@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
-                                        <i class="fas fa-th-large fa-lg"></i>
+                                        <i class="fas fa-industry fa-lg"></i>
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
-                                        <i class="fas fa-car fa-lg"></i>
+                                        <i class="fas fa-th-large fa-lg"></i>
                                     </div>
                                 </div>
                             </div>

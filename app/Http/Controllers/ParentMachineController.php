@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ParentMachine;
 use Illuminate\Http\Request;
 use App\Models\Department;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ParentMachineController extends Controller
 {
@@ -46,8 +47,13 @@ class ParentMachineController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('parentmachines.index')
-            ->with('success', 'Berhasil menambahkan data');
+
+        if ($parentmachine) {
+            // example:
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
+
+            return redirect()->route('parentmachines.index');
+        }
     }
 
     /**

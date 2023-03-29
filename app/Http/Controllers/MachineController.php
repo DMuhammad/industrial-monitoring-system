@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Machine;
 use App\Models\ParentMachine;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MachineController extends Controller
 {
@@ -46,8 +47,10 @@ class MachineController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('machines.index')
-            ->with('success', 'Berhasil menambahkan data');
+        if ($machine) {
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
+            return redirect()->route('hourmeters.index');
+        }
     }
 
     /**

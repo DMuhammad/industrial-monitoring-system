@@ -8,6 +8,7 @@ use App\Models\ParentMachine;
 use App\Models\PartMachine;
 use App\Models\Replacement;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ReplacementController extends Controller
 {
@@ -57,8 +58,10 @@ class ReplacementController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('replacements.index')
-            ->with('success', 'Berhasil menambahkan data');
+        if ($replacement) {
+            Alert::success('Berhasil', 'Berhasil menambahkan data');
+            return redirect()->route('replacements.index');
+        }
     }
 
     /**
@@ -102,8 +105,10 @@ class ReplacementController extends Controller
         ]);
 
         // redirect to index and bring message success
-        return redirect()->route('replacements.index')
-            ->with('success', 'Berhasil mengubah data');
+        if ($replacement) {
+            Alert::success('Berhasil', 'Berhasil mengubah data');
+            return redirect()->route('replacements.index');
+        }
     }
 
     /**

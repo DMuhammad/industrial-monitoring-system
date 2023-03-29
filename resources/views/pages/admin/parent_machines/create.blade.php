@@ -32,7 +32,7 @@
                             @enderror
                         </div>
                         <div class="pt-2 mb-3 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary" onclick="handleCreate()">Save</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                             <a href="{{ route('parentmachines.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>

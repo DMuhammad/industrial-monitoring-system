@@ -5,12 +5,6 @@
         <div class="row justify-content-sm-center">
             <div class="col-12 col-xl-6 col-md-8">
                 <div class="bg-white shadow-sm border rounded border-light p-4 p-lg-5 w-100">
-                    @error('email')
-                        <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>{{ $message }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @enderror
                     <div class="text-center text-md-center mb-4 mt-md-0">
                         <h1>Welcome Back!</h1>
                     </div>
@@ -24,8 +18,14 @@
                                 <span class="input-group-text text-secondary" id="basic-addon1">
                                     <i class="align-middle" data-feather="mail"></i>
                                 </span>
-                                <input id="email" class="form-control" type="email" name="email"
-                                    placeholder="name@example.com" autofocus required>
+                                <input id="email" class="form-control @error('email') is-invalid @enderror"
+                                    type="email" name="email" placeholder="name@example.com" required
+                                    value="{{ old('email') }}" autocomplete="email">
+                                @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <!-- End of Form -->
@@ -38,7 +38,7 @@
                                     <i class="align-middle" data-feather="lock"></i>
                                 </span>
                                 <input id="password" class="form-control" type="password" name="password"
-                                    placeholder="Password" required>
+                                    placeholder="Password" required autocomplete="current-password">
                             </div>
                         </div>
                         <!-- End of Form -->
