@@ -100,9 +100,9 @@
         const dataTable = new simpleDatatables.DataTable(table);
     </script>
 
-    <script>
-        @include('sweetalert::alert')
+    @include('sweetalert::alert')
 
+    <script>
         function handleDelete(e) {
             e.preventDefault();
             const form = document.querySelector('.form-delete');
@@ -126,8 +126,6 @@
     </script>
 
     <script>
-        console.log(window.location.pathname);
-
         if (window.location.pathname == '/') {
             toastr.options.timeOut = 4000;
             @if (Session::has('error'))
