@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\DropDownController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HourMeterController;
 use App\Http\Controllers\MachineController;
