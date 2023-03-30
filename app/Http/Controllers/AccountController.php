@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
@@ -13,7 +15,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         return view('pages.account.index', compact('user'));
     }
@@ -55,10 +57,33 @@ class AccountController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($user) {
-            Alert::success('Berhasil', 'Berhasil mengubah data');
-            return redirect()->route('home');
+        if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
+            Alert::error('Gagal', 'Your current password does not matches with the password.');
+            return redirect()->back()->with('error', 'Your current password does not matches with the password.');
         }
+
+        if (strcmp($request->get('old_password'), $request->get('password')) == 0) {
+            Alert::error('Gagal', 'New password cannot be same as your current password.');
+            return redirect()->back()->with('error', 'New password cannot be same as your current password.');
+        }
+
+        $this->validate($request, [
+            'old_password'  =>  ['required'],
+            'password'      =>  ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        // $user->update([
+        //     'password'  => bcrypt($request->get('password'))
+        // ]);
+
+        User::whereId(auth()->user()->id)->update([
+            'password'  =>  Hash::make($request->password)
+        ]);
+
+        Alert::success('Berhasil', 'Berhasil mengubah password');
+        return redirect()->route('home');
+        // if ($user) {
+        // }
     }
 
     /**

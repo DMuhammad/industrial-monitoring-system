@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravolt\Avatar\Facade as Avatar;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -35,6 +36,7 @@ class RegisterController extends Controller
         ]);
 
         if ($user) {
+            Storage::disk('local')->makeDirectory('public/profile/');
             Avatar::create($user->name)->save('storage/profile/avatar-' . $user->id . '.png', 100);
 
             // redirect to login and bring message success

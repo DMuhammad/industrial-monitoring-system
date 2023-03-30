@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Laravolt\Avatar\Facade as Avatar;
+use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
@@ -30,6 +33,16 @@ class LoginController extends Controller
             'email'     => $request->get('email'),
             'password'  => $request->get('password')
         ], $remember)) {
+            $avatar_path = storage_path() . '/app/profile/avatar-' . Auth::user()->id . '.png';
+
+            if (!File::exists($avatar_path)) {
+
+                // if not we generate one
+                Storage::disk('local')->makeDirectory('public/profile/');
+                Avatar::create(Auth::user()->name)->save('storage/profile/avatar-' . Auth::user()->id . '.png', 100);
+                $avatar_path = storage_path() . '/app/profile/avatar-' . Auth::user()->id . '.png';
+            }
+
             $request->session()->regenerate();
 
             return redirect('/')->with('success', 'Login berhasil!');
