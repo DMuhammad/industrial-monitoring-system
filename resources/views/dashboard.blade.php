@@ -75,6 +75,42 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card">
+                        <div class="table-responsive p-3">
+                            <table class="table table-hover" id="simple-datatables">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Parent</th>
+                                        <th>Machine</th>
+                                        <th>Part</th>
+                                        <th>Standar HM</th>
+                                        <th>HM Today</th>
+                                        <th>Last Replacement</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($replacements as $replacement)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $replacement->parentmachine->parent_name }}</td>
+                                            <td>{{ $replacement->machine->machine_name }}</td>
+                                            <td>{{ $replacement->partmachine->part_name }}</td>
+                                            <td>{{ $replacement->partmachine->standard_hourmeter }}</td>
+                                            <td>{{ $replacement->partmachine->standard_hourmeter }}</td>
+                                            <td>{{ number_format($replacement->replacement_hourmeter) }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($replacement->input_date)) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
