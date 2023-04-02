@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar sidebar-menu">
     <div class="sidebar-content">
-        <a class="sidebar-brand" href="/dashboard">
+        <a class="sidebar-brand" href="/">
             <span class="align-middle">Sismonin</span>
         </a>
 
