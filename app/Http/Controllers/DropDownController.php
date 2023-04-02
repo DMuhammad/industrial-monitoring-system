@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\Machine;
 use App\Models\ParentMachine;
+use App\Models\PartMachine;
 use Illuminate\Http\Request;
 
 class DropDownController extends Controller
@@ -29,7 +29,7 @@ class DropDownController extends Controller
 
     public function getPartMachine(Request $request)
     {
-        $partmachines = Machine::where('machine_id', $request->machine_id)->get();
+        $partmachines = PartMachine::where('machine_id', $request->machine_id)->get();
 
         if (count($partmachines) > 0) {
             return response()->json($partmachines);
