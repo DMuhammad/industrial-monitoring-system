@@ -36,6 +36,10 @@ class ParentMachineController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($request->get('department_id'))) {
+            return back()->with('error', 'Data tidak lengkap');
+        }
+
         $this->validate($request, [
             'parent_name'   =>  ['required', 'string'],
             'department_id' =>  ['required']

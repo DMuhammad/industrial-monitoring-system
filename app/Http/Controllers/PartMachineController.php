@@ -36,6 +36,10 @@ class PartMachineController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($request->get('machine_id'))) {
+            return back()->with('error', 'Data tidak lengkap');
+        }
+
         $this->validate($request, [
             'part_name'             =>  ['required', 'string'],
             'standard_hourmeter'    =>  ['required', 'Integer'],

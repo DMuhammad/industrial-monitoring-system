@@ -36,6 +36,10 @@ class MachineController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($request->get('parent_id'))) {
+            return back()->with('error', 'Data tidak lengkap');
+        }
+
         $this->validate($request, [
             'machine_name'  =>  ['required', 'string'],
             'parent_id'     =>  ['required']

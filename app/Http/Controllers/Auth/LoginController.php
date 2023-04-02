@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,16 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $remember = $request->has('remember') ? true : false;
+
         $this->validate($request, [
             'email'     => ['required', 'string', 'email:dns'],
             'password'  => ['required', 'string', 'min:8']
         ]);
+
+        if (count(User::where('email', $request->get('email'))->get()) == 0) {
+            return back()->with('error', 'Email tidak ditemukan! Silahkan registrasi');
+        }
+
         if (Auth::attempt([
             'email'     => $request->get('email'),
             'password'  => $request->get('password')
