@@ -48,7 +48,7 @@
                     url: '{{ route('parentmachine') }}?department_id='+departmentId,
                     type: 'get',
                     success: function (res) {
-                        $('#parent_id').html('<option value="" disabled>--- Select Parent ---</option>');
+                        $('#parent_id').html('<option value="" selected disabled>--- Select Parent ---</option>');
                         $.each(res, function (key, value) {
                             $('#parent_id').append('<option value="' + value
                                 .id + '">' + value.parent_name + '</option>');
@@ -64,7 +64,7 @@
                     url: '{{ route('machine') }}?parent_id='+parentId,
                     type: 'get',
                     success: function (res) {
-                        $('#machine_id').html('<option value="" disabled>--- Select Machine ---</option>');
+                        $('#machine_id').html('<option value="" selected disabled>--- Select Machine ---</option>');
                         $.each(res, function (key, value) {
                             $('#machine_id').append('<option value="' + value
                                 .id + '">' + value.machine_name + '</option>');
@@ -80,7 +80,7 @@
                     url: '{{ route('partmachine') }}?machine_id='+machineId,
                     type: 'get',
                     success: function (res) {
-                        $('#part_id').html('<option value="" disabled>--- Select Part Machine ---</option>');
+                        $('#part_id').html('<option value="" selected disabled>--- Select Part ---</option>');
                         $.each(res, function (key, value) {
                             $('#part_id').append('<option value="' + value
                                 .id + '">' + value.part_name + '</option>');
