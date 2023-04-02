@@ -16,7 +16,7 @@
                                 <option value="" selected disabled>--- Select Machine ---</option>
                                 @foreach ($machines as $machine)
                                     <option value="{{ $machine->id }}">
-                                        {{ $machine->machine_name }}
+                                        {{ $machine->machine_name . ' ( ' . $machine->parentmachine->parent_name . ' )' }}
                                     </option>
                                 @endforeach
                             </select>

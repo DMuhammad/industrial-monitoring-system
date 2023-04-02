@@ -12,7 +12,7 @@
                             <div class="row align-items-center">
                                 <div class="col me-2">
                                     <h3 class="card-title mb-3">Departments</h3>
-                                    <h1 class="card-text">{{ $departments }}</h1>
+                                    <h1 class="card-text">{{ count($departments) }}</h1>
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
@@ -27,9 +27,9 @@
                     <div class="card border border-left-primary shadow pt-2 card-size">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col me-2">
+                                <div class="col">
                                     <h3 class="card-title mb-3">Parent Machines</h3>
-                                    <p class="h1">{{ $parentmachines }}</p>
+                                    <p class="h1">{{ count($parentmachines) }}</p>
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
@@ -46,7 +46,7 @@
                             <div class="row align-items-center">
                                 <div class="col me-2">
                                     <h3 class="card-title mb-3">Machines</h3>
-                                    <p class="h1">{{ $machines }}</p>
+                                    <p class="h1">{{ count($machines) }}</p>
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
@@ -63,7 +63,7 @@
                             <div class="row align-items-center">
                                 <div class="col me-2">
                                     <h3 class="card-title mb-3">Part Machines</h3>
-                                    <p class="h1">{{ $partmachines }}</p>
+                                    <p class="h1">{{ count($partmachines) }}</p>
                                 </div>
                                 <div class="col-auto">
                                     <div class="stat text-primary">
@@ -89,18 +89,19 @@
                                         <th>Standar HM</th>
                                         <th>HM Today</th>
                                         <th>Last Replacement</th>
-                                        <th>Date</th>
+                                        <th data-sortable="false">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- @dd($replacements) --}}
                                     @foreach ($replacements as $replacement)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $replacement->parentmachine->parent_name }}</td>
                                             <td>{{ $replacement->machine->machine_name }}</td>
                                             <td>{{ $replacement->partmachine->part_name }}</td>
-                                            <td>{{ $replacement->partmachine->standard_hourmeter }}</td>
-                                            <td>{{ $replacement->partmachine->standard_hourmeter }}</td>
+                                            <td>{{ number_format($replacement->partmachine->standard_hourmeter) }}</td>
+                                            <td>{{ number_format($replacement->hourmeter) }}</td>
                                             <td>{{ number_format($replacement->replacement_hourmeter) }}</td>
                                             <td>{{ date('d-m-Y', strtotime($replacement->input_date)) }}</td>
                                         </tr>

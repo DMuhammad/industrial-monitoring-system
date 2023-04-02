@@ -116,9 +116,6 @@
                 confirmButtonText: 'Hapus',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        "Deleted!", "Data Anda Berhasil Dihapus.", "success"
-                    )
                     form.submit();
                 }
             })
@@ -126,14 +123,14 @@
     </script>
 
     <script>
-        if (window.location.pathname == '/') {
+        $(document).ready(function() {
             toastr.options.timeOut = 4000;
             @if (Session::has('error'))
                 toastr.error('{{ Session::get('error') }}');
             @elseif (Session::has('success'))
                 toastr.success('{{ Session::get('success') }}');
             @endif
-        }
+        });
     </script>
 </body>
 
