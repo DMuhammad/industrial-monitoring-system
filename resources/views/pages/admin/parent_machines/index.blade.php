@@ -27,15 +27,22 @@
                                     <td>{{ $parentmachine->parent_name }}</td>
                                     <td>{{ $parentmachine->department->department_name }}</td>
                                     <td>
-                                        <form action="{{ route('parentmachines.destroy', $parentmachine->id) }}"
-                                            method="post" class="form-delete">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">
-                                                <i class="far fa-trash-alt mx-lg-1"></i>
-                                                <span class="d-none d-sm-inline-block">Delete</span>
-                                            </button>
-                                        </form>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <a href="{{ route('parentmachines.edit', $parentmachine->id) }}"
+                                                class="btn btn-warning">
+                                                <i class="fas fa-edit mx-lg-1"></i>
+                                                <span class="d-none d-sm-inline-block">Edit</span>
+                                            </a>
+                                            <form action="{{ route('parentmachines.destroy', $parentmachine->id) }}"
+                                                method="post" class="form-delete">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">
+                                                    <i class="far fa-trash-alt mx-lg-1"></i>
+                                                    <span class="d-none d-sm-inline-block">Delete</span>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

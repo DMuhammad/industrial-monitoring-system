@@ -35,14 +35,21 @@
                                     <td>{{ $machine->machine_name }}</td>
                                     <td>{{ $machine->parentmachine->parent_name }}</td>
                                     <td>
-                                        <form action="{{ route('machines.destroy', $machine->id) }}" method="post"
-                                            class="form-delete">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">
-                                                <i class="far fa-trash-alt mx-lg-1"></i> Delete
-                                            </button>
-                                        </form>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <a href="{{ route('machines.edit', $machine->id) }}"
+                                                class="btn btn-warning">
+                                                <i class="fas fa-edit mx-lg-1"></i>
+                                                <span class="d-none d-sm-inline-block">Edit</span>
+                                            </a>
+                                            <form action="{{ route('machines.destroy', $machine->id) }}" method="post"
+                                                class="form-delete">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">
+                                                    <i class="far fa-trash-alt mx-lg-1"></i> Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

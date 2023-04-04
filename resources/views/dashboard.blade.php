@@ -87,9 +87,8 @@
                                         <th>Machine</th>
                                         <th>Part</th>
                                         <th>Standar HM</th>
-                                        <th>HM Today</th>
-                                        <th>Last Replacement</th>
-                                        <th data-sortable="false">Date</th>
+                                        <th>HM After Replacement</th>
+                                        <th data-sortable="false">Last Update</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,8 +100,7 @@
                                             <td>{{ $replacement->machine->machine_name }}</td>
                                             <td>{{ $replacement->partmachine->part_name }}</td>
                                             <td>{{ number_format($replacement->partmachine->standard_hourmeter) }}</td>
-                                            <td>{{ number_format($replacement->hourmeter) }}</td>
-                                            <td>{{ number_format($replacement->replacement_hourmeter) }}</td>
+                                            <td>{{ number_format($replacement->hourmeter - $replacement->replacement_hourmeter) }}</td>
                                             <td>{{ date('d-m-Y', strtotime($replacement->input_date)) }}</td>
                                         </tr>
                                     @endforeach
