@@ -17,7 +17,11 @@ class ParentMachineController extends Controller
         $parentmachines = ParentMachine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from parentmachines
-        return view('pages.admin.parent_machines.index', compact('parentmachines'));
+        return view(
+            'pages.admin.parent_machines.index',
+            compact('parentmachines'),
+            ['title' => 'Parent Machine']
+        );
     }
 
     /**
@@ -28,7 +32,11 @@ class ParentMachineController extends Controller
         $departments = Department::get();
 
         // return view create form with data from departments
-        return view('pages.admin.parent_machines.create', compact('departments'));
+        return view(
+            'pages.admin.parent_machines.create',
+            compact('departments'),
+            ['title' => 'Add Parent Machine']
+        );
     }
 
     /**
@@ -53,6 +61,45 @@ class ParentMachineController extends Controller
         if ($parentmachine) {
             // redirect to index and bring message success
             Alert::success('Berhasil', 'Berhasil menambahkan data');
+
+            return redirect()->route('parentmachines.index');
+        }
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(ParentMachine $parentmachine)
+    {
+        $departments = Department::get();
+
+        // return view to edit with data from hourmeter, and departments
+        return view(
+            'pages.admin.parent_machines.edit',
+            compact('parentmachine', 'departments'),
+            ['title' => 'Edit Parent Machine']
+        );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, ParentMachine $parentmachine)
+    {
+        $this->validate($request, [
+            'parent_name'   =>  ['required', 'string'],
+            'department_id' =>  ['required']
+        ]);
+
+        $parentmachine->update([
+            'parent_name'   =>  $request->get('parent_name'),
+            'department_id' =>  $request->get('department_id')
+        ]);
+
+        if ($parentmachine) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil mengubah data');
 
             return redirect()->route('parentmachines.index');
         }

@@ -18,7 +18,11 @@ class HourMeterController extends Controller
         $hourmeters = HourMeter::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from hourmeters
-        return view('pages.hour_meters.index', compact('hourmeters'));
+        return view(
+            'pages.hour_meters.index',
+            compact('hourmeters'),
+            ['title' => 'Hour Meter']
+        );
     }
 
     /**
@@ -29,7 +33,11 @@ class HourMeterController extends Controller
         $departments = Department::get();
 
         // return view create form with data departments
-        return view('pages.hour_meters.create', compact('departments'));
+        return view(
+            'pages.hour_meters.create',
+            compact('departments'),
+            ['title' => 'Add Hour Meter']
+        );
     }
 
     /**
@@ -70,7 +78,11 @@ class HourMeterController extends Controller
         $parentmachines = ParentMachine::where('department_id', $hourmeter->department_id)->get();
 
         // return view to edit with data from hourmeter, and departments
-        return view('pages.hour_meters.edit', compact('hourmeter', 'departments', 'parentmachines'));
+        return view(
+            'pages.hour_meters.edit',
+            compact('hourmeter', 'departments', 'parentmachines'),
+            ['title' => 'Edit Hour Meter']
+        );
     }
 
     /**

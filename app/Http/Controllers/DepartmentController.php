@@ -16,7 +16,11 @@ class DepartmentController extends Controller
         $departments = Department::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from departments
-        return view('pages.admin.departments.index', compact('departments'));
+        return view(
+            'pages.admin.departments.index',
+            compact('departments'),
+            ['title' => 'Department']
+        );
     }
 
     /**
@@ -25,7 +29,10 @@ class DepartmentController extends Controller
     public function create()
     {
         // return view create form
-        return view('pages.admin.departments.create');
+        return view(
+            'pages.admin.departments.create',
+            ['title' => 'Add Department']
+        );
     }
 
     /**
@@ -45,6 +52,40 @@ class DepartmentController extends Controller
             // redirect to index and bring message success
 
             alert()->success('Berhasil', 'Berhasil menambahkan data');
+
+            return redirect()->route('departments.index');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Department $department)
+    {
+        // return view to edit with data from hourmeter, and departments
+        return view(
+            'pages.admin.departments.edit',
+            compact('department'),
+            ['title' => 'Edit Department']
+        );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Department $department)
+    {
+        $this->validate($request, [
+            'department_name' => ['required', 'string', 'unique:departments']
+        ]);
+
+        $department->update([
+            'department_name' => $request->get('department_name')
+        ]);
+
+        if ($department) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil mengubah data');
 
             return redirect()->route('departments.index');
         }

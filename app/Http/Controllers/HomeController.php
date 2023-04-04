@@ -20,15 +20,15 @@ class HomeController extends Controller
         $parentmachines = ParentMachine::get();
         $machines = Machine::get();
         $partmachines = PartMachine::get();
-
-
         $replacements = Replacement::join('hour_meters', 'replacements.parent_id', '=', 'hour_meters.parent_id')
-            ->select('replacements.*', 'hour_meters.hourmeter')
-            ->where([
-                ['hour_meters.input_date', '=', date('Y-m-d')]
-            ])
+            ->select('replacements.*', 'hour_meters.hourmeter', 'hour_meters.input_date')
+            ->orderBy('hour_meters.input_date', 'desc')
             ->get();
 
-        return view('dashboard', compact('departments', 'parentmachines', 'machines', 'partmachines', 'replacements'));
+        return view(
+            'dashboard',
+            compact('departments', 'parentmachines', 'machines', 'partmachines', 'replacements'),
+            ['title' => 'Dashboard']
+        );
     }
 }

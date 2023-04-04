@@ -17,7 +17,11 @@ class MachineController extends Controller
         $machines = Machine::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from machines
-        return view('pages.admin.machines.index', compact('machines'));
+        return view(
+            'pages.admin.machines.index',
+            compact('machines'),
+            ['title' => 'Machine']
+        );
     }
 
     /**
@@ -28,7 +32,11 @@ class MachineController extends Controller
         $parentmachines = ParentMachine::get();
 
         // return view create form with data from machines and parentmachines
-        return view('pages.admin.machines.create', compact('parentmachines'));
+        return view(
+            'pages.admin.machines.create',
+            compact('parentmachines'),
+            ['title' => 'Add Machine']
+        );
     }
 
     /**
@@ -53,6 +61,44 @@ class MachineController extends Controller
         if ($machine) {
             // redirect to index and bring message success
             Alert::success('Berhasil', 'Berhasil menambahkan data');
+
+            return redirect()->route('machines.index');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Machine $machine)
+    {
+        $parentmachines = ParentMachine::get();
+
+        // return view to edit with data from hourmeter, and departments
+        return view(
+            'pages.admin.machines.edit',
+            compact('machine', 'parentmachines'),
+            ['title' => 'Edit Machine']
+        );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Machine $machine)
+    {
+        $this->validate($request, [
+            'machine_name'  =>  ['required', 'string'],
+            'parent_id'     =>  ['required']
+        ]);
+
+        $machine->update([
+            'machine_name'  =>  $request->get('machine_name'),
+            'parent_id'     =>  $request->get('parent_id')
+        ]);
+
+        if ($machine) {
+            // redirect to index and bring message success
+            Alert::success('Berhasil', 'Berhasil mengubah data');
 
             return redirect()->route('machines.index');
         }

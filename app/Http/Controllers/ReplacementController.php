@@ -20,7 +20,11 @@ class ReplacementController extends Controller
         $replacements = Replacement::orderBy('created_at', 'desc')->get();
 
         // return view to index with data from replacements
-        return view('pages.replacements.index', compact('replacements'));
+        return view(
+            'pages.replacements.index',
+            compact('replacements'),
+            ['title' => 'Replacement']
+        );
     }
 
     /**
@@ -31,7 +35,11 @@ class ReplacementController extends Controller
         $departments = Department::get();
 
         // return view to index with data from departments
-        return view('pages.replacements.create', compact('departments'));
+        return view(
+            'pages.replacements.create',
+            compact('departments'),
+            ['title' => 'Add Replacement']
+        );
     }
 
     /**
@@ -78,7 +86,11 @@ class ReplacementController extends Controller
         $partmachines = PartMachine::where('machine_id', $replacement->machine_id)->get();
 
         // return view to edit with data from replacement, departments, parentmachines, machines, and partmachines
-        return view('pages.replacements.edit', compact('replacement', 'departments', 'parentmachines', 'machines', 'partmachines'));
+        return view(
+            'pages.replacements.edit',
+            compact('replacement', 'departments', 'parentmachines', 'machines', 'partmachines'),
+            ['title' => 'Edit Replacement']
+        );
     }
 
     /**
