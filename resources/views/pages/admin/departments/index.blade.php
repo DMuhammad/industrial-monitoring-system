@@ -35,7 +35,7 @@
                                                 class="form-delete">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger" onclick="handleDelete(event)">
+                                                <button type="submit" class="btn btn-danger ondelete">
                                                     <i class="far fa-trash-alt me-xl-1"></i>
                                                     <span class="d-none d-sm-inline-block">Delete</span>
                                                 </button>

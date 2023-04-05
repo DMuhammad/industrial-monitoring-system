@@ -103,9 +103,9 @@
     @include('sweetalert::alert')
 
     <script>
-        function handleDelete(e) {
+            $('.ondelete').click(function(e) {
+            const form = $(this).closest("form");
             e.preventDefault();
-            const form = document.querySelector('.form-delete');
             Swal.fire({
                 title: 'Apakah Anda Yakin?',
                 text: "Data Anda Tidak Dapat di Kembalikan",
@@ -119,7 +119,7 @@
                     form.submit();
                 }
             })
-        }
+        })
     </script>
 
     <script>

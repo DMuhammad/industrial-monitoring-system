@@ -47,8 +47,7 @@
                                                 action="{{ route('replacements.destroy', $replacement->id) }}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger btn-delete"
-                                                    onclick="handleDelete(event)">
+                                                <button type="submit" class="btn btn-danger btn-delete ondelete">
                                                     <i class="far fa-trash-alt mx-lg-1"></i>
                                                     <span class="d-none d-sm-inline-block">Delete</span>
                                                 </button>
