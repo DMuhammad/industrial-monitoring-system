@@ -21,8 +21,8 @@ class HomeController extends Controller
         $machines = Machine::get();
         $partmachines = PartMachine::get();
         $replacements = Replacement::join('hour_meters', 'replacements.parent_id', '=', 'hour_meters.parent_id')
-            ->select('replacements.*', 'hour_meters.hourmeter', 'hour_meters.input_date')
-            ->orderBy('hour_meters.input_date', 'desc')
+            ->select('replacements.*', 'hour_meters.hourmeter', 'hour_meters.created_at')
+            ->orderBy('hour_meters.created_at', 'desc')
             ->get();
 
         return view(

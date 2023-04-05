@@ -101,7 +101,7 @@
                                             <td>{{ $replacement->partmachine->part_name }}</td>
                                             <td>{{ number_format($replacement->partmachine->standard_hourmeter) }}</td>
                                             <td>{{ number_format($replacement->hourmeter - $replacement->replacement_hourmeter) }}</td>
-                                            <td>{{ date('d-m-Y', strtotime($replacement->input_date)) }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($replacement->created_at)) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
